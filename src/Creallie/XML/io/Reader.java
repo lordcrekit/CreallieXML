@@ -52,38 +52,41 @@ public final class Reader {
      *
      * @param document
      * @param instream
+     * @return
      * @throws IOException
      */
-    public static void read( CreaDocument document, InputStream instream ) throws IOException {
-        read(document, new InputSource(instream));
+    public static CreaDocument read( CreaDocument document, InputStream instream ) throws IOException {
+        return read(document, new InputSource(instream));
     }
 
     /**
      *
      * @param document
      * @param reader
+     * @return
      * @throws IOException
      */
-    public static void read( CreaDocument document, java.io.Reader reader ) throws IOException {
-        read(document, new InputSource(reader));
+    public static CreaDocument read( CreaDocument document, java.io.Reader reader ) throws IOException {
+        return read(document, new InputSource(reader));
     }
 
     /**
      *
      * @param document
      * @param file
+     * @return
      * @throws IOException
      */
-    public static void read( CreaDocument document, File file ) throws IOException {
+    public static CreaDocument read( CreaDocument document, File file ) throws IOException {
         try ( FileInputStream instream = new FileInputStream(file) ) {
-            read(document, new InputSource(instream));
+            return read(document, new InputSource(instream));
         }
     }
 
     /*
      * ================================================ PRIVATE FUNCTIONS ===============================================
      */
-    private static void read( CreaDocument document, InputSource source ) throws IOException {
+    private static CreaDocument read( CreaDocument document, InputSource source ) throws IOException {
         document.setRootElement(null);
         try {
             SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
@@ -124,5 +127,6 @@ public final class Reader {
         } catch ( ParserConfigurationException | SAXException ex ) {
             Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return document;
     }
 }

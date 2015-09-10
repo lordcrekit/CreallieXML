@@ -27,7 +27,7 @@ package Creallie.XML.document;
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public class StandardDocument implements CreaDocument {
+public final class StandardDocument implements CreaDocument {
 
     /*
      * ================================================ MEMBER VARIABLES ================================================
@@ -41,6 +41,14 @@ public class StandardDocument implements CreaDocument {
      * Default constructor for StandardDocument.
      */
     public StandardDocument() {
+    }
+
+    /**
+     *
+     * @param rootName
+     */
+    public StandardDocument( String rootName ) {
+        mRootElement = initElement(rootName);
     }
 
     /*
