@@ -42,6 +42,14 @@ public interface CreaDocument {
     /**
      *
      * @param name
+     * @param value
+     * @return
+     */
+    public CreaElement initElement( String name, String value );
+
+    /**
+     *
+     * @param name
      * @return
      */
     public CreaProperty initProperty( String name );

@@ -93,6 +93,7 @@ public final class Reader {
             DefaultHandler handler = new DefaultHandler() {
 
                 CreaElement currentElement = null;
+                StringBuilder curVal;
 
                 @Override
                 public void startElement( String uri, String localName, String qName, Attributes attributes ) throws SAXException {
@@ -106,11 +107,11 @@ public final class Reader {
                     else
                         currentElement.addChild(newEle);
                     currentElement = newEle;
-
                 }
 
                 @Override
                 public void endElement( String uri, String localName, String qName ) throws SAXException {
+                    currentElement.setValue(curVal == null ? null : curVal.toString());
                     currentElement = currentElement.getParent();
                 }
 
@@ -120,7 +121,10 @@ public final class Reader {
                     char buf[] = new char[length];
                     for ( int i = 0; i < length; i++ )
                         buf[i] = ch[start + i];
-                    currentElement.setValue(new String(buf));
+                    if ( curVal == null )
+                        curVal = new StringBuilder(new String(buf));
+                    else
+                        curVal.append(buf);
                 }
             };
             parser.parse(source, handler);

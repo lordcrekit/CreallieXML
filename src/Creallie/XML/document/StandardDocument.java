@@ -60,6 +60,11 @@ public final class StandardDocument implements CreaDocument {
     }
 
     @Override
+    public CreaElement initElement( String name, String value ) {
+        return new StandardElement().setName(name).setValue(value);
+    }
+
+    @Override
     public CreaProperty initProperty( String name ) {
         return new StandardProperty().setName(name);
     }

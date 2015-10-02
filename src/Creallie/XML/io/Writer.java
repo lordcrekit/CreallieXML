@@ -28,6 +28,7 @@ import Creallie.XML.document.CreaElement;
 import Creallie.XML.document.CreaProperty;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -46,9 +47,10 @@ public final class Writer {
      *
      * @param document
      * @param outstream
+     * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void write( CreaDocument document, OutputStream outstream ) throws IOException {
+    public static void write( CreaDocument document, OutputStream outstream ) throws FileNotFoundException, IOException {
         write(document, new BufferedWriter(new OutputStreamWriter(outstream)));
     }
 
@@ -56,9 +58,10 @@ public final class Writer {
      *
      * @param document
      * @param writer
+     * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void write( CreaDocument document, java.io.Writer writer ) throws IOException {
+    public static void write( CreaDocument document, java.io.Writer writer ) throws FileNotFoundException, IOException {
         write(document, new BufferedWriter(writer));
     }
 
@@ -66,9 +69,10 @@ public final class Writer {
      *
      * @param document
      * @param file
+     * @throws FileNotFoundException
      * @throws IOException
      */
-    public static void write( CreaDocument document, File file ) throws IOException {
+    public static void write( CreaDocument document, File file ) throws FileNotFoundException, IOException {
         try ( FileOutputStream outstream = new FileOutputStream(file) ) {
             write(document, new BufferedWriter(new OutputStreamWriter(outstream)));
         }
@@ -77,7 +81,7 @@ public final class Writer {
     /*
      * ================================================ PRIVATE FUNCTIONS ===============================================
      */
-    private static void write( CreaDocument document, BufferedWriter writer ) throws IOException {
+    private static void write( CreaDocument document, BufferedWriter writer ) throws FileNotFoundException, IOException {
         writer.write(getVersion());
         if ( document.getRootElement().exists() )
             recursion(writer, document.getRootElement());
@@ -85,14 +89,14 @@ public final class Writer {
         writer.flush();
     }
 
-    private static void recursion( BufferedWriter writer, CreaElement element ) throws IOException {
+    private static void recursion( BufferedWriter writer, CreaElement element ) throws FileNotFoundException, IOException {
         writer.write("<");
         writer.write(element.getName());
         for ( CreaProperty prop : element.getProperties() ){
             writer.write(" ");
             writer.write(prop.getName());
             writer.write("=\"");
-            writer.write(prop.getValue());
+            writer.write(escape_chars(prop.getValue()));
             writer.write("\"");
         }
         if ( (element.getValue() == null || element.getValue().isEmpty()) && element.getChildren().isEmpty() )
@@ -100,7 +104,7 @@ public final class Writer {
         else {
             writer.write(">");
             if ( element.getValue() != null && !element.getValue().isEmpty() )
-                writer.write(element.getValue());
+                writer.write(escape_chars(element.getValue()));
 
             for ( CreaElement child : element.getChildren() )
                 recursion(writer, child);
@@ -113,5 +117,9 @@ public final class Writer {
 
     private static String getVersion() {
         return "<?xml version=\"1.0\"?>";
+    }
+
+    private static String escape_chars( String out ) {
+        return out.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("'", "&apos;").replaceAll("<", "&lt;").replaceAll("&gt;", ">");
     }
 }
