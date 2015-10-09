@@ -92,27 +92,33 @@ public final class Writer {
     private static void recursion( BufferedWriter writer, CreaElement element ) throws FileNotFoundException, IOException {
         writer.write("<");
         writer.write(element.getName());
-        for ( CreaProperty prop : element.getProperties() ){
-            writer.write(" ");
-            writer.write(prop.getName());
-            writer.write("=\"");
-            writer.write(escape_chars(prop.getValue()));
-            writer.write("\"");
-        }
+        for ( CreaProperty prop : element.getProperties() )
+            try {
+                writer.write(" ");
+                writer.write(prop.getName());
+                writer.write("=\"");
+                writer.write(escape_chars(prop.getValue()));
+                writer.write("\"");
+            } catch ( NullPointerException ex ) {
+                throw new RuntimeException("In property: " + prop.getName(), ex);
+            }
         if ( (element.getValue() == null || element.getValue().isEmpty()) && element.getChildren().isEmpty() )
             writer.write(" />");
-        else {
-            writer.write(">");
-            if ( element.getValue() != null && !element.getValue().isEmpty() )
-                writer.write(escape_chars(element.getValue()));
+        else
+            try {
+                writer.write(">");
+                if ( element.getValue() != null && !element.getValue().isEmpty() )
+                    writer.write(escape_chars(element.getValue()));
 
-            for ( CreaElement child : element.getChildren() )
-                recursion(writer, child);
+                for ( CreaElement child : element.getChildren() )
+                    recursion(writer, child);
 
-            writer.write("</");
-            writer.write(element.getName());
-            writer.write(">");
-        }
+                writer.write("</");
+                writer.write(element.getName());
+                writer.write(">");
+            } catch ( NullPointerException ex ) {
+                throw new RuntimeException("In element: " + element.getName(), ex);
+            }
     }
 
     private static String getVersion() {
