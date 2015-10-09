@@ -99,7 +99,7 @@ public final class Writer {
                 writer.write("=\"");
                 writer.write(escape_chars(prop.getValue()));
                 writer.write("\"");
-            } catch ( NullPointerException ex ) {
+            } catch ( Exception ex ) {
                 throw new RuntimeException("In property: " + prop.getName(), ex);
             }
         if ( (element.getValue() == null || element.getValue().isEmpty()) && element.getChildren().isEmpty() )
@@ -116,7 +116,7 @@ public final class Writer {
                 writer.write("</");
                 writer.write(element.getName());
                 writer.write(">");
-            } catch ( NullPointerException ex ) {
+            } catch ( Exception ex ) {
                 throw new RuntimeException("In element: " + element.getName(), ex);
             }
     }
