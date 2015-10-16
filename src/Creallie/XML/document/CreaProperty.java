@@ -37,6 +37,7 @@ public interface CreaProperty extends CreaStructure {
      * @param element
      * @return
      */
+    @Override
     public CreaProperty setParent( CreaElement element );
 
     /**

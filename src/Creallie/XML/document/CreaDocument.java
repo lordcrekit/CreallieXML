@@ -50,13 +50,6 @@ public interface CreaDocument {
     /**
      *
      * @param name
-     * @return
-     */
-    public CreaProperty initProperty( String name );
-
-    /**
-     *
-     * @param name
      * @param value
      * @return
      */

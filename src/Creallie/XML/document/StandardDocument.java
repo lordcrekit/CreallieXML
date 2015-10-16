@@ -65,13 +65,8 @@ public final class StandardDocument implements CreaDocument {
     }
 
     @Override
-    public CreaProperty initProperty( String name ) {
-        return new StandardProperty().setName(name);
-    }
-
-    @Override
     public CreaProperty initProperty( String name, String value ) {
-        return new StandardProperty().setName(name).setValue(value);
+        return new StandardProperty(name, value);
     }
 
     /*

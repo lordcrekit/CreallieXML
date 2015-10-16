@@ -33,10 +33,12 @@ public final class StandardProperty extends StandardStructure implements CreaPro
      * ================================================== CONSTRUCTORS ==================================================
      */
     /**
-     * Default constructor for StandardProperty.
+     * Constructs a new StandardProperty.
      */
-    StandardProperty() {
+    StandardProperty( String name, String value ) {
         super();
+        setName(name);
+        setValue(value);
     }
 
     /*
@@ -59,6 +61,8 @@ public final class StandardProperty extends StandardStructure implements CreaPro
 
     @Override
     public CreaProperty setValue( String value ) {
+        if ( value == null )
+            throw new NullPointerException("Properties cannot have null values!");
         super.setValue(value);
         return this;
     }

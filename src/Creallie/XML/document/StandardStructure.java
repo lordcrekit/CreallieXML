@@ -88,11 +88,4 @@ public abstract class StandardStructure implements CreaStructure {
         mValue = value;
         return this;
     }
-
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
-    /*
-     * ================================================ PRIVATE FUNCTIONS ===============================================
-     */
 }
