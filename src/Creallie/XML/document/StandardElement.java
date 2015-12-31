@@ -52,17 +52,16 @@ public final class StandardElement extends StandardStructure implements CreaElem
     }
 
     /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    /*
      * =============================================== GETTERS AND SETTERS ==============================================
      */
     @Override
     public CreaElement setParent( CreaElement element ) {
-        if ( getParent() != null )
-            getParent().removeChild(this);
-
+        CreaElement oldParent = getParent();
         super.setParent(element);
+
+        if ( oldParent != null && oldParent != getParent() )
+            oldParent.removeChild(this);
+
         return this;
     }
 
@@ -78,13 +77,15 @@ public final class StandardElement extends StandardStructure implements CreaElem
 
     @Override
     public CreaElement addChild( CreaElement element ) {
-        mChildren.add(element.setParent(this));
+        if ( element.getParent() != this )
+            mChildren.add(element.setParent(this));
         return this;
     }
 
     @Override
     public CreaElement removeChild( CreaElement element ) {
-        mChildren.remove(element.setParent(null));
+        if ( element.getParent() == this )
+            mChildren.remove(element.setParent(null));
         return this;
     }
 
@@ -125,7 +126,29 @@ public final class StandardElement extends StandardStructure implements CreaElem
     /*
      * ================================================ VISUAL FUNCTIONS ================================================
      */
-    /*
-     * ================================================ PRIVATE FUNCTIONS ===============================================
-     */
+    @Override
+    public String toString() {
+        return toString(new StringBuilder(), 0).toString();
+    }
+
+    @Override
+    public StringBuilder toString( StringBuilder strb, int indents ) {
+        strb.append("\n");
+        if ( indents > 0 ) {
+            char[] indent = new char[indents];
+            for ( int i = 0; i < indents; i++ )
+                indent[i] = '\t';
+            strb.append(indent);
+        }
+        strb.append("<").append(getName());
+        for ( CreaProperty i : mPropertys )
+            strb.append(" ").append(i.toString());
+        strb.append(">");
+        if ( getValue() != null )
+            strb.append(getValue());
+        for ( CreaElement i : mChildren )
+            i.toString(strb, indents + 1);
+
+        return strb;
+    }
 }

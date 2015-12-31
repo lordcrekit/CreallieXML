@@ -120,4 +120,5 @@ public interface CreaElement extends CreaStructure {
     /*
      * ================================================ VISUAL FUNCTIONS ================================================
      */
+    public StringBuilder toString(StringBuilder strb, int indents);
 }

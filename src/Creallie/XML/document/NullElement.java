@@ -121,4 +121,9 @@ public final class NullElement extends NullStructure implements CreaElement {
     public String toString() {
         throw new UnsupportedOperationException("Todo");    // TODO: THIS
     }
+
+    @Override
+    public StringBuilder toString( StringBuilder strb, int indents ) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

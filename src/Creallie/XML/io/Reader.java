@@ -112,6 +112,7 @@ public final class Reader {
                 @Override
                 public void endElement( String uri, String localName, String qName ) throws SAXException {
                     currentElement.setValue(curVal == null ? null : curVal.toString());
+                    curVal = new StringBuilder();
                     currentElement = currentElement.getParent();
                 }
 

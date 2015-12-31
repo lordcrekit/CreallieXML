@@ -70,4 +70,8 @@ public final class StandardProperty extends StandardStructure implements CreaPro
     /*
      * ================================================ VISUAL FUNCTIONS ================================================
      */
+    @Override
+    public String toString() {
+        return getName() + "=\"" + getValue() + "\"";
+    }
 }
