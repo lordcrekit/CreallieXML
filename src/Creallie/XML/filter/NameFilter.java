@@ -41,9 +41,9 @@ public final class NameFilter implements CreaDocumentFilter {
      * ================================================== CONSTRUCTORS ==================================================
      */
     /**
-     * Constructor for NameFilter.
+     * Constructors a new NameFilter. Accepts any element or property with a matching name.
      *
-     * @param name
+     * @param name <code>{@link String }</code>: The name that must be matched.
      */
     public NameFilter( String name ) {
         mName = name;
@@ -54,11 +54,11 @@ public final class NameFilter implements CreaDocumentFilter {
      */
     @Override
     public boolean accepts( CreaElement element ) {
-        return ( element.getName() == null ? mName == null : element.getName().equals(mName) );
+        return (element.getName() == null ? mName == null : element.getName().equals(mName));
     }
 
     @Override
     public boolean accepts( CreaProperty property ) {
-        return ( property.getName() == null ? mName == null : property.getName().equals(mName) );
+        return (property.getName() == null ? mName == null : property.getName().equals(mName));
     }
 }

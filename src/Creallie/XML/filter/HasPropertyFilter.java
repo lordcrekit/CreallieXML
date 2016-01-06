@@ -43,8 +43,9 @@ public final class HasPropertyFilter implements CreaDocumentFilter {
      * ================================================== CONSTRUCTORS ==================================================
      */
     /**
+     * Constructs a new HasPropertyFilter where any Element with at least one matching property will be accepted.
      *
-     * @param filters
+     * @param filters <code>{@link CreaDocumentFilter }...</code>: Filters that will be run on all properties.
      */
     public HasPropertyFilter( CreaDocumentFilter... filters ) {
         mMatchCount = i -> (i > 0);
@@ -52,9 +53,11 @@ public final class HasPropertyFilter implements CreaDocumentFilter {
     }
 
     /**
+     * Constructs a new HasPropertyFilter where any numerical check may be defined. Only CreaElements where the number of properties that pass all filters is
+     * accepted by the numerical check will be accepted.
      *
-     * @param matchCount
-     * @param filters
+     * @param matchCount <code>{@link Predicate }&lt;{@link Integer }&gt;</code>: A numeral check.
+     * @param filters    <code>{@link CreaDocumentFilter }...</code>: Filters that will be run on all properties.
      */
     public HasPropertyFilter( Predicate<Integer> matchCount, CreaDocumentFilter... filters ) {
         mMatchCount = matchCount;

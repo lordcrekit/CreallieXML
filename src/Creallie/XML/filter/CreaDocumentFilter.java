@@ -27,26 +27,27 @@ import Creallie.XML.document.CreaElement;
 import Creallie.XML.document.CreaProperty;
 
 /**
+ * Defines a filter for elements and properties in a CreaDocument. When passed to associate search and get functions, will filter out the returned structures.
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public interface CreaDocumentFilter {
-    
+
     /*
      * ================================================ PRIMARY FUNCTIONS ===============================================
      */
     /**
-     * 
+     *
      * @param element
-     * @return 
+     * @return
      */
-    public boolean accepts(CreaElement element);
-    
+    public boolean accepts( CreaElement element );
+
     /**
-     * 
+     *
      * @param property
-     * @return 
+     * @return
      */
-    public boolean accepts(CreaProperty property);
-    
+    public boolean accepts( CreaProperty property );
+
 }
