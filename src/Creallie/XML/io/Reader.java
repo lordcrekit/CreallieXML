@@ -93,15 +93,20 @@ public final class Reader {
             DefaultHandler handler = new DefaultHandler() {
 
                 CreaElement currentElement = null;
-                StringBuilder curVal;
+                StringBuilder curVal = null;
 
                 @Override
                 public void startElement( String uri, String localName, String qName, Attributes attributes ) throws SAXException {
 
+                    // Create a new Element.
                     CreaElement newEle = document.initElement(qName);
+                    // Add any attributes to the new Element.
                     for ( int i = 0; i < attributes.getLength(); i++ )
                         newEle.addProperty(document.initProperty(attributes.getQName(i), attributes.getValue(i)));
 
+                    if ( curVal != null )
+                        currentElement.setValue(curVal.toString());
+                    curVal = new StringBuilder();
                     if ( currentElement == null )
                         document.setRootElement(newEle);
                     else
@@ -111,14 +116,17 @@ public final class Reader {
 
                 @Override
                 public void endElement( String uri, String localName, String qName ) throws SAXException {
-                    currentElement.setValue(curVal == null ? null : curVal.toString());
-                    curVal = new StringBuilder();
+                    if ( curVal != null ) {
+                        currentElement.setValue(curVal == null ? null : curVal.toString());
+                        curVal = null;
+                    }
                     currentElement = currentElement.getParent();
                 }
 
                 @Override
                 public void characters( char ch[], int start, int length ) throws SAXException {
-                    // TODO : UNESCAPE CHARACTERS
+                    assert curVal != null : "While reading " + new String(ch, start, length);
+
                     char buf[] = new char[length];
                     for ( int i = 0; i < length; i++ )
                         buf[i] = ch[start + i];

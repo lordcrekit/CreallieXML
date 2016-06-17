@@ -37,16 +37,18 @@ public interface CreaDocumentFilter {
      * ================================================ PRIMARY FUNCTIONS ===============================================
      */
     /**
+     * Filter method for CreaElements.
      *
-     * @param element
-     * @return
+     * @param element <code>{@link CreaElement }</code>: The element that is being tested.
+     * @return <code>boolean</code>: True if the CreaElement should be accepted, otherwise false.
      */
     public boolean accepts( CreaElement element );
 
     /**
+     * Filter method for CreaProperties.
      *
-     * @param property
-     * @return
+     * @param property <code>{@link CreaProperty }</code>: The property that is being tested.
+     * @return <code>boolean</code>: True if the CreaProperty should be accepted, otherwise false.
      */
     public boolean accepts( CreaProperty property );
 
