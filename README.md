@@ -1,5 +1,7 @@
 # CreallieXML
-*Simplified XML reader, writer, and data structure. Designed for working with purely hierarchical data.
+* Simplified XML reader, writer, and data structure.
+* Designed for working with purely hierarchical data.
+* Exactly preserves data written in it. When reading outside xml, ignores whitespace used for formatting.
 
 ## Data
 * Unlike normal HTML, the textual data of every element and property may be made up of only pure text.
@@ -49,3 +51,6 @@ boolean exists = rootElement
     new NameFilter("Factor")
   ).exists();
 ```
+
+## Whitespace policy
+* I have to write this still. After I've done the unit tests, this will be updated.
