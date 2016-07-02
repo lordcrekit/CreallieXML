@@ -25,10 +25,14 @@ package Creallie.XML.io;
 
 import Creallie.XML.document.CreaDocument;
 import Creallie.XML.document.CreaElement;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
@@ -45,101 +49,114 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public final class Reader {
 
-    /*
+	/*
      * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    /**
-     *
-     * @param document
-     * @param instream
-     * @return
-     * @throws IOException
-     */
-    public static CreaDocument read( CreaDocument document, InputStream instream ) throws IOException {
-        return read(document, new InputSource(instream));
-    }
+	 */
+	/**
+	 *
+	 * @param document
+	 * @param instream
+	 * @return
+	 * @throws IOException
+	 */
+	public static CreaDocument read( CreaDocument document, InputStream instream ) throws IOException {
+		return read(document, new InputSource(instream));
+	}
 
-    /**
-     *
-     * @param document
-     * @param reader
-     * @return
-     * @throws IOException
-     */
-    public static CreaDocument read( CreaDocument document, java.io.Reader reader ) throws IOException {
-        return read(document, new InputSource(reader));
-    }
+	/**
+	 *
+	 * @param document
+	 * @param reader
+	 * @return
+	 * @throws IOException
+	 */
+	public static CreaDocument read( CreaDocument document, java.io.Reader reader ) throws IOException {
+		return read(document, new InputSource(reader));
+	}
 
-    /**
-     *
-     * @param document
-     * @param file
-     * @return
-     * @throws IOException
-     */
-    public static CreaDocument read( CreaDocument document, File file ) throws IOException {
-        try ( FileInputStream instream = new FileInputStream(file) ) {
-            return read(document, new InputSource(instream));
-        }
-    }
+	/**
+	 *
+	 * @param document
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 */
+	public static CreaDocument read( CreaDocument document, File file ) throws IOException {
+		try ( FileInputStream instream = new FileInputStream(file) ) {
+			return read(document, new InputSource(instream));
+		}
+	}
 
-    /*
+	/**
+	 * 
+	 * @param document
+	 * @param path
+	 * @return
+	 * @throws IOException 
+	 */
+	public static CreaDocument read( CreaDocument document, Path path ) throws IOException {
+		try ( BufferedReader reader = Files.newBufferedReader(path) ) {
+			return read(document, reader);
+		}
+	}
+
+	/*
      * ================================================ PRIVATE FUNCTIONS ===============================================
-     */
-    private static CreaDocument read( CreaDocument document, InputSource source ) throws IOException {
-        document.setRootElement(null);
-        try {
-            SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
-            DefaultHandler handler = new DefaultHandler() {
+	 */
+	private static CreaDocument read( CreaDocument document, InputSource source ) throws IOException {
+		document.setRootElement(null);
+		try {
+			SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+			DefaultHandler handler = new DefaultHandler() {
 
-                CreaElement currentElement = null;
-                StringBuilder curVal = null;
+				CreaElement currentElement = null;
+				StringBuilder curVal = null;
 
-                @Override
-                public void startElement( String uri, String localName, String qName, Attributes attributes ) throws SAXException {
+				@Override
+				public void startElement( String uri, String localName, String qName, Attributes attributes ) throws SAXException {
 
-                    // Create a new Element.
-                    CreaElement newEle = document.initElement(qName);
-                    // Add any attributes to the new Element.
-                    for ( int i = 0; i < attributes.getLength(); i++ )
-                        newEle.addProperty(document.initProperty(attributes.getQName(i), attributes.getValue(i)));
+					// Create a new Element.
+					CreaElement newEle = document.initElement(qName);
+					// Add any attributes to the new Element.
+					for ( int i = 0; i < attributes.getLength(); i++ )
+						newEle.addProperty(document.initProperty(attributes.getQName(i), attributes.getValue(i)));
 
-                    if ( curVal != null )
-                        currentElement.setValue(curVal.toString());
-                    curVal = new StringBuilder();
-                    if ( currentElement == null )
-                        document.setRootElement(newEle);
-                    else
-                        currentElement.addChild(newEle);
-                    currentElement = newEle;
-                }
+					if ( curVal != null )
+						currentElement.setValue(curVal.toString());
+					curVal = new StringBuilder();
+					if ( currentElement == null )
+						document.setRootElement(newEle);
+					else
+						currentElement.addChild(newEle);
+					currentElement = newEle;
+				}
 
-                @Override
-                public void endElement( String uri, String localName, String qName ) throws SAXException {
-                    if ( curVal != null ) {
-                        currentElement.setValue(curVal == null ? null : curVal.toString());
-                        curVal = null;
-                    }
-                    currentElement = currentElement.getParent();
-                }
+				@Override
+				public void endElement( String uri, String localName, String qName ) throws SAXException {
+					if ( curVal != null ) {
+						currentElement.setValue(curVal == null ? null : curVal.toString());
+						curVal = null;
+					}
+					currentElement = currentElement.getParent();
+				}
 
-                @Override
-                public void characters( char ch[], int start, int length ) throws SAXException {
-                    assert curVal != null : "While reading " + new String(ch, start, length);
+				@Override
+				public void characters( char ch[], int start, int length ) throws SAXException {
+					assert curVal != null : "While reading " + new String(ch, start, length);
 
-                    char buf[] = new char[length];
-                    for ( int i = 0; i < length; i++ )
-                        buf[i] = ch[start + i];
-                    if ( curVal == null )
-                        curVal = new StringBuilder(new String(buf));
-                    else
-                        curVal.append(buf);
-                }
-            };
-            parser.parse(source, handler);
-        } catch ( ParserConfigurationException | SAXException ex ) {
-            Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return document;
-    }
+					char buf[] = new char[length];
+					for ( int i = 0; i < length; i++ )
+						buf[i] = ch[start + i];
+					if ( curVal == null )
+						curVal = new StringBuilder(new String(buf));
+					else
+						curVal.append(buf);
+				}
+			};
+			parser.parse(source, handler);
+		} catch ( ParserConfigurationException | SAXException ex ) {
+			Logger.getLogger(Reader.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return document;
+	}
 }
