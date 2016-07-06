@@ -27,6 +27,7 @@ import Creallie.XML.filter.CreaDocumentFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -51,6 +52,28 @@ public final class StandardElement extends StandardStructure implements CreaElem
         super();
     }
 
+	/*
+     * ================================================ PRIMARY FUNCTIONS ===============================================
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if ( !(o instanceof CreaElement) )
+			return false;
+		if ( !super.equals(o))
+			return false;
+		CreaElement oe = (CreaElement) o;
+		return this.mChildren.equals(oe.getChildren())
+				&& this.mPropertys.equals(oe.getProperties());
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 41 * hash + Objects.hashCode(this.mChildren);
+		hash = 41 * hash + Objects.hashCode(this.mPropertys);
+		return hash;
+	}
+	
     /*
      * =============================================== GETTERS AND SETTERS ==============================================
      */
@@ -133,21 +156,25 @@ public final class StandardElement extends StandardStructure implements CreaElem
 
     @Override
     public StringBuilder toString( StringBuilder strb, int indents ) {
-        strb.append("\n");
         if ( indents > 0 ) {
             char[] indent = new char[indents];
             for ( int i = 0; i < indents; i++ )
                 indent[i] = '\t';
             strb.append(indent);
         }
-        strb.append("<").append(getName());
+        strb.append("<").append(this.getName());
         for ( CreaProperty i : mPropertys )
             strb.append(" ").append(i.toString());
         strb.append(">");
         if ( getValue() != null )
-            strb.append(getValue());
-        for ( CreaElement i : mChildren )
-            i.toString(strb, indents + 1);
+            strb.append(this.getValue()
+					.replaceAll("\n", "\\\\n")
+					.replaceAll("\t", "\\\\t")
+					.replaceAll("\\\\", "\\\\"));
+        for ( CreaElement i : mChildren ){
+            strb.append('\n');
+			i.toString(strb, indents + 1);
+		}
 
         return strb;
     }
