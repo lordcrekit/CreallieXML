@@ -28,7 +28,6 @@ import Creallie.XML.document.CreaElement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -88,11 +87,11 @@ public final class Reader {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param document
 	 * @param path
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public static CreaDocument read( CreaDocument document, Path path ) throws IOException {
 		try ( BufferedReader reader = Files.newBufferedReader(path) ) {
@@ -142,15 +141,20 @@ public final class Reader {
 
 				@Override
 				public void characters( char ch[], int start, int length ) throws SAXException {
-					assert curVal != null : "While reading " + new String(ch, start, length);
+					assert currentElement != null;
+					//assert curVal == null : "While reading " + new String(ch, start, length);
 
-					char buf[] = new char[length];
-					for ( int i = 0; i < length; i++ )
-						buf[i] = ch[start + i];
-					if ( curVal == null )
-						curVal = new StringBuilder(new String(buf));
-					else
-						curVal.append(buf);
+					curVal = currentElement.getValue() == null
+							? new StringBuilder()
+							: new StringBuilder(currentElement.getValue());
+//					for ( int i = 0; i < length; i++ )
+//						if ( (ch[start + i] == ' ' || ch[start + i] == '\t' || ch[start + i] == '\n')
+//								&& curVal.length() > 0 && curVal.charAt(curVal.length() - 1) != ' ' )
+//							curVal.append(' ');
+//						else
+//							curVal.append(ch[start + i]);
+					curVal.append(new String(ch, start, length).trim());
+					currentElement.setValue(curVal.toString());
 				}
 			};
 			parser.parse(source, handler);

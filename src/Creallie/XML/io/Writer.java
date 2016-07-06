@@ -26,7 +26,6 @@ package Creallie.XML.io;
 import Creallie.XML.document.CreaDocument;
 import Creallie.XML.document.CreaElement;
 import Creallie.XML.document.CreaProperty;
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
