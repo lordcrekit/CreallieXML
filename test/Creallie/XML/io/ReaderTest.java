@@ -25,12 +25,11 @@ package Creallie.XML.io;
 
 import Creallie.XML.document.CreaDocument;
 import Creallie.XML.document.StandardDocument;
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import org.junit.After;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -41,51 +40,76 @@ import static org.junit.Assert.*;
  */
 public class ReaderTest {
 
-    private static final File FILE = new File("test.xml");
+	private static Path FILE = null;
 
-    public ReaderTest() throws IOException {
-        CreaDocument doc = new StandardDocument("TestingDoc");
-        doc.getRootElement()
-                .addChild(doc.initElement("first", "0"))
-                .addChild(doc.initElement("second", "1")
-                        .addProperty(doc.initProperty("atr01", "A")))
-                .addChild(doc.initElement("third", "2")
-                        .addChild(doc.initElement("inner_first", "a")
-                                .addChild(doc.initElement("innner_inner_first", "_a"))));
+	public ReaderTest() {
+	}
 
-        Writer.write(doc, FILE);
-        CreaDocument afterDoc = Creallie.XML.io.Reader.read(new StandardDocument(), FILE);
-        String before = doc.toString();
-        String after = afterDoc.toString();
-        System.out.println("BEFORE:\n" + before);
-        System.out.println("AFTER:\n" + after);
-        assertEquals(before, after);
-    }
+	@BeforeClass
+	public static void setUpClass() throws IOException {
+		System.out.println(Reader.class.getName());
+		FILE = Files.createTempDirectory("CreallieXML-Tests");
+	}
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+	@AfterClass
+	public static void tearDownClass() throws IOException {
+		Files.delete(FILE);
+	}
 
-    @AfterClass
-    public static void tearDownClass() {
-        FILE.delete();
-    }
+	@Test
+	public void testIO() throws IOException {
+		System.out.println("test IO");
+		CreaDocument doc = new StandardDocument("TestingDoc");
+		doc.getRootElement()
+				.addChild(doc.initElement("first", "0"))
+				.addChild(doc.initElement("second", "1")
+						.addProperty(doc.initProperty("atr01", "A"))
+				).addChild(doc.initElement("third", "2")
+						.addChild(doc.initElement("inner_first", "a")
+								.addChild(doc.initElement("innner_inner_first", "_a"))
+						)
+				);
 
-    @Before
-    public void setUp() {
-    }
+		Path xml_path = Paths.get(FILE.toString(), "example.xml");
+		try {
+			Writer.write(doc, xml_path);
+			CreaDocument afterDoc = Creallie.XML.io.Reader.read(new StandardDocument(), xml_path);
+			String before = doc.toString();
+			String after = afterDoc.toString();
+			assertEquals(before, after);
+		} finally {
+			Files.delete(xml_path);
+		}
+	}
 
-    @After
-    public void tearDown() {
-    }
+	@Test
+	public void testWhitespacePolicy() throws IOException {
+		System.out.println("test Whitespace Policy");
+		for ( Path p : Files.newDirectoryStream(Paths.get("test-data", "whitespace")) ) {
+			System.out.println("\t" + p.getFileName());
+			CreaDocument expected = Reader.read(new StandardDocument(), Paths.get(p.toString(), "expected.xml"));
+			CreaDocument got = Reader.read(new StandardDocument(), Paths.get(p.toString(), "got.xml"));
+			assertEquals(String.format("===Expected===\n%s\n\n===Got===\n%s\n", expected, got),
+					true, expected.equals(got));
+		}
+	}
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_CreaDocument_InputStream() throws Exception {
+	/**
+	 * Test to make sure characters are properly un-escaped.
+	 */
+	@Test
+	public void testUnescapingPolicy() {
+		fail("todo");
+	}
+
+	/**
+	 * Test of read method, of class Reader.
+	 *
+	 * @throws java.lang.Exception
+	 */
+	@Test
+	public void testRead_CreaDocument_InputStream() throws Exception {
+		System.out.println("test Read(CreaDocument, InputStream)");
 //        System.out.println("read");
 //        CreaDocument document = null;
 //        InputStream instream = null;
@@ -95,15 +119,16 @@ public class ReaderTest {
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-    }
+	}
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_CreaDocument_Reader() throws Exception {
+	/**
+	 * Test of read method, of class Reader.
+	 *
+	 * @throws java.lang.Exception
+	 */
+	@Test
+	public void testRead_CreaDocument_Reader() throws Exception {
+		System.out.println("test Read(CreaDocument, Reader)");
 //        System.out.println("read");
 //        CreaDocument document = null;
 //        Reader reader = null;
@@ -112,15 +137,16 @@ public class ReaderTest {
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-    }
+	}
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_CreaDocument_File() throws Exception {
+	/**
+	 * Test of read method, of class Reader.
+	 *
+	 * @throws java.lang.Exception
+	 */
+	@Test
+	public void testRead_CreaDocument_File() throws Exception {
+		System.out.println("test Read(CreaDocument, File)");
 //        System.out.println("read");
 //        CreaDocument document = null;
 //        File file = null;
@@ -129,6 +155,6 @@ public class ReaderTest {
 //        assertEquals(expResult, result);
 //        // TODO review the generated test code and remove the default call to fail.
 //        fail("The test case is a prototype.");
-    }
+	}
 
 }

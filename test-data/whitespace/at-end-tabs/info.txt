@@ -1,0 +1,1 @@
+Tabs (and other whitespace) after the document ends should be ignored.

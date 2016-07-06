@@ -1,0 +1,1 @@
+Formatted text should be read exactly the same as unformatted.

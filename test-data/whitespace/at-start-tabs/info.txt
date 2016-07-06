@@ -1,0 +1,1 @@
+Tabs (and other whitespace) before the document should be ignored.

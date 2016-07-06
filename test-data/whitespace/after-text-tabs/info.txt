@@ -1,0 +1,1 @@
+Tabs (and other whitespace) after text content should be ignored.
