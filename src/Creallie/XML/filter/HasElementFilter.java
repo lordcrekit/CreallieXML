@@ -66,7 +66,7 @@ public class HasElementFilter implements CreaDocumentFilter {
      */
     @Override
     public boolean accepts( CreaElement element ) {
-        return mMatchCount.test(element.getProperties(mFilters).size());
+        return mMatchCount.test(element.getChildren(mFilters).size());
     }
 
     @Override
