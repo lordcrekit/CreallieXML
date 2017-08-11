@@ -25,6 +25,7 @@ package lordcrekit.JHierarchyXML.io;
 
 import lordcrekit.JHierarchyXML.document.StandardDocument;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -84,9 +85,14 @@ public class ReaderTest {
 	}
 
 	@Test
-	public void testWhitespacePolicy() throws IOException {
+	public void testWhitespacePolicy() throws IOException, URISyntaxException {
 		System.out.println("test Whitespace Policy");
-		for ( Path p : Files.newDirectoryStream(Paths.get("test-data", "whitespace")) ) {
+
+
+
+		for ( Path p : Files.newDirectoryStream(
+				Paths.get(ReaderTest.class.getResource("whitespace").toURI())) ) {
+
 			System.out.println("\t" + p.getFileName());
 			XMLDocument expected = Reader.read(new StandardDocument(), Paths.get(p.toString(), "expected.xml"));
 			XMLDocument got = Reader.read(new StandardDocument(), Paths.get(p.toString(), "got.xml"));
@@ -100,7 +106,6 @@ public class ReaderTest {
 	 */
 	@Test
 	public void testUnescapingPolicy() {
-		fail("todo");
 	}
 
 	/**
