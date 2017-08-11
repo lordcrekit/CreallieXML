@@ -21,44 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.filter;
+package lordcrekit.JHierarchyXML.filter;
 
-import Creallie.XML.document.CreaElement;
-import Creallie.XML.document.CreaProperty;
+import lordcrekit.JHierarchyXML.document.XMLElement;
+import lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
+ * Defines a filter for elements and properties in a XMLDocument. When passed to associate search and get functions,
+ * will filter out the returned structures.
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public final class NameFilter implements CreaDocumentFilter {
+public interface XMLDocumentFilter {
 
-    /*
-     * ================================================ MEMBER VARIABLES ================================================
-     */
-    private final String mName;
-
-    /*
-     * ================================================== CONSTRUCTORS ==================================================
-     */
     /**
-     * Constructors a new NameFilter. Accepts any element or property with a matching name.
+     * Filter method for XMLElements.
      *
-     * @param name <code>{@link String }</code>: The name that must be matched.
+     * @param element
+     *         <code>{@link XMLElement }</code>: The element that is being tested.
+     * @return <code>boolean</code>: True if the XMLElement should be accepted, otherwise false.
      */
-    public NameFilter( String name ) {
-        mName = name;
-    }
+    boolean accepts(final XMLElement element);
 
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
+    /**
+     * Filter method for XMLProperties.
+     *
+     * @param property
+     *         <code>{@link XMLProperty }</code>: The property that is being tested.
+     * @return <code>boolean</code>: True if the XMLProperty should be accepted, otherwise false.
      */
-    @Override
-    public boolean accepts( CreaElement element ) {
-        return (element.getName() == null ? mName == null : element.getName().equals(mName));
-    }
-
-    @Override
-    public boolean accepts( CreaProperty property ) {
-        return (property.getName() == null ? mName == null : property.getName().equals(mName));
-    }
+    boolean accepts(final XMLProperty property);
 }

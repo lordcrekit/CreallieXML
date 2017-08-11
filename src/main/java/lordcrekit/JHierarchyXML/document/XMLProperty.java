@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public interface CreaProperty extends CreaStructure {
+public interface XMLProperty extends XMLStructure {
 
     /*
      * =============================================== GETTERS AND SETTERS ==============================================
@@ -38,7 +38,7 @@ public interface CreaProperty extends CreaStructure {
      * @return
      */
     @Override
-    public CreaProperty setParent( CreaElement element );
+    XMLProperty setParent( XMLElement element );
 
     /**
      *
@@ -46,7 +46,7 @@ public interface CreaProperty extends CreaStructure {
      * @return
      */
     @Override
-    public CreaProperty setName( String name );
+    XMLProperty setName( String name );
 
     /**
      *
@@ -54,5 +54,5 @@ public interface CreaProperty extends CreaStructure {
      * @return
      */
     @Override
-    public CreaProperty setValue( String value );
+    XMLProperty setValue( String value );
 }

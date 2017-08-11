@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 import java.util.Objects;
 
@@ -29,16 +29,10 @@ import java.util.Objects;
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public final class StandardDocument implements CreaDocument {
+public final class StandardDocument implements XMLDocument {
 
-	/*
-     * ================================================ MEMBER VARIABLES ================================================
-	 */
-	private CreaElement mRootElement = null;
+	private XMLElement mRootElement = null;
 
-	/*
-     * ================================================== CONSTRUCTORS ==================================================
-	 */
 	/**
 	 * Default constructor for StandardDocument.
 	 */
@@ -53,29 +47,26 @@ public final class StandardDocument implements CreaDocument {
 		mRootElement = initElement(rootName);
 	}
 
-	/*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-	 */
 	@Override
-	public CreaElement initElement( String name ) {
+	public XMLElement initElement( String name ) {
 		return new StandardElement().setName(name);
 	}
 
 	@Override
-	public CreaElement initElement( String name, String value ) {
+	public XMLElement initElement( String name, String value ) {
 		return new StandardElement().setName(name).setValue(value);
 	}
 
 	@Override
-	public CreaProperty initProperty( String name, String value ) {
+	public XMLProperty initProperty( String name, String value ) {
 		return new StandardProperty(name, value);
 	}
 
 	@Override
 	public boolean equals( Object o ) {
-		if ( !(o instanceof CreaDocument) )
+		if ( !(o instanceof XMLDocument) )
 			return false;
-		CreaDocument od = (CreaDocument) o;
+		XMLDocument od = (XMLDocument) o;
 		return this.getRootElement() == null
 				? od.getRootElement() == null
 				: this.getRootElement().equals(od.getRootElement());
@@ -88,29 +79,19 @@ public final class StandardDocument implements CreaDocument {
 		return hash;
 	}
 
-	/*
-     * =============================================== GETTERS AND SETTERS ==============================================
-	 */
 	@Override
-	public CreaElement getRootElement() {
+	public XMLElement getRootElement() {
 		return (mRootElement == null ? NullElement.getInstance() : mRootElement);
 	}
 
 	@Override
-	public CreaDocument setRootElement( CreaElement element ) {
+	public XMLDocument setRootElement( XMLElement element ) {
 		mRootElement = element;
 		return this;
 	}
 
-	/*
-     * ================================================ VISUAL FUNCTIONS ================================================
-	 */
 	@Override
 	public String toString() {
 		return "<document>\n" + mRootElement.toString() + "\n</document>";
 	}
-
-	/*
-     * ================================================ PRIVATE FUNCTIONS ===============================================
-	 */
 }

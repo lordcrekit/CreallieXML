@@ -21,38 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public abstract class NullStructure implements CreaStructure {
+public abstract class NullStructure implements XMLStructure {
 
-    /*
-     * ======================================== CONSTRUCTORS & INSTANCE FUNCTIONS =======================================
-     */
     protected NullStructure() {
     }
 
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
     @Override
     public boolean exists() {
         return false;
     }
 
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
     @Override
-    public CreaElement getParent() {
+    public XMLElement getParent() {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaStructure setParent( CreaElement element ) {
+    public XMLStructure setParent( XMLElement element ) {
         return this;
     }
     
@@ -66,9 +57,6 @@ public abstract class NullStructure implements CreaStructure {
         return null;
     }
 
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
     @Override
     public String toString() {
         throw new UnsupportedOperationException("Todo");    // TODO: THIS

@@ -21,35 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.filter;
-
-import Creallie.XML.document.CreaElement;
-import Creallie.XML.document.CreaProperty;
+package lordcrekit.JHierarchyXML.document;
 
 /**
- * Defines a filter for elements and properties in a CreaDocument. When passed to associate search and get functions, will filter out the returned structures.
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public interface CreaDocumentFilter {
-
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    /**
-     * Filter method for CreaElements.
-     *
-     * @param element <code>{@link CreaElement }</code>: The element that is being tested.
-     * @return <code>boolean</code>: True if the CreaElement should be accepted, otherwise false.
-     */
-    public boolean accepts( CreaElement element );
+public interface XMLDocument {
 
     /**
-     * Filter method for CreaProperties.
      *
-     * @param property <code>{@link CreaProperty }</code>: The property that is being tested.
-     * @return <code>boolean</code>: True if the CreaProperty should be accepted, otherwise false.
+     * @param name
+     * @return
      */
-    public boolean accepts( CreaProperty property );
+    XMLElement initElement( String name );
 
+    /**
+     *
+     * @param name
+     * @param value
+     * @return
+     */
+    XMLElement initElement( String name, String value );
+
+    /**
+     *
+     * @param name
+     * @param value
+     * @return
+     */
+    XMLProperty initProperty( String name, String value );
+
+    /**
+     *
+     * @return
+     */
+    XMLElement getRootElement();
+
+    /**
+     *
+     * @param element
+     * @return
+     */
+    XMLDocument setRootElement( XMLElement element );
 }

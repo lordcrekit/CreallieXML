@@ -21,56 +21,52 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
-import Creallie.XML.filter.CreaDocumentFilter;
+import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
 import java.util.List;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public interface CreaElement extends CreaStructure {
+public interface XMLElement extends XMLStructure {
 
-    
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
     /**
      *
      * @param element
      * @return
      */
     @Override
-    public CreaElement setParent( CreaElement element );
+    XMLElement setParent( XMLElement element );
     
     /**
      *
      * @param filters
      * @return
      */
-    public CreaElement getChild( CreaDocumentFilter... filters );
+    XMLElement getChild( XMLDocumentFilter... filters );
 
     /**
      *
      * @param filters
      * @return
      */
-    public List<CreaElement> getChildren( CreaDocumentFilter... filters );
+    List<XMLElement> getChildren( XMLDocumentFilter... filters );
 
     /**
      *
      * @param element
      * @return
      */
-    public CreaElement addChild( CreaElement element );
+    XMLElement addChild( XMLElement element );
 
     /**
      *
      * @param element
      * @return
      */
-    public CreaElement removeChild( CreaElement element );
+    XMLElement removeChild( XMLElement element );
 
     
     /**
@@ -78,28 +74,28 @@ public interface CreaElement extends CreaStructure {
      * @param filters
      * @return 
      */
-    public CreaProperty getProperty(CreaDocumentFilter... filters);
+    XMLProperty getProperty(XMLDocumentFilter... filters);
     
     /**
      * 
      * @param filters
      * @return 
      */
-    public List<CreaProperty> getProperties(CreaDocumentFilter... filters);
+    List<XMLProperty> getProperties(XMLDocumentFilter... filters);
     
     /**
      *
      * @param property
      * @return
      */
-    public CreaElement addProperty( CreaProperty property );
+    XMLElement addProperty( XMLProperty property );
 
     /**
      *
      * @param property
      * @return
      */
-    public CreaElement removeProperty( CreaProperty property );
+    XMLElement removeProperty( XMLProperty property );
 
     /**
      *
@@ -107,7 +103,7 @@ public interface CreaElement extends CreaStructure {
      * @return
      */
     @Override
-    public CreaElement setName( String name );
+    XMLElement setName( String name );
 
     /**
      *
@@ -115,10 +111,7 @@ public interface CreaElement extends CreaStructure {
      * @return
      */
     @Override
-    public CreaElement setValue( String value );
+    XMLElement setValue( String value );
 
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
-    public StringBuilder toString(StringBuilder strb, int indents);
+    StringBuilder toString(StringBuilder strb, int indents);
 }

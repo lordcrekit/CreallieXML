@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 import java.util.Objects;
 
@@ -29,27 +29,18 @@ import java.util.Objects;
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public abstract class StandardStructure implements CreaStructure {
+public abstract class StandardStructure implements XMLStructure {
 
-	/*
-     * ================================================ MEMBER VARIABLES ================================================
-	 */
-	private CreaElement mParent;
+	private XMLElement mParent;
 	private String mName;
 	private String mValue;
 
-	/*
-     * ================================================== CONSTRUCTORS ==================================================
-	 */
 	/**
 	 * Default constructor for StandardStructure.
 	 */
 	protected StandardStructure() {
 	}
 
-	/*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-	 */
 	@Override
 	public boolean exists() {
 		return true;
@@ -57,9 +48,9 @@ public abstract class StandardStructure implements CreaStructure {
 
 	@Override
 	public boolean equals( Object o ) {
-		if ( !(o instanceof CreaStructure) )
+		if ( !(o instanceof XMLStructure) )
 			return false;
-		CreaStructure os = (CreaStructure) o;
+		XMLStructure os = (XMLStructure) o;
 		return (this.getName() == null
 				? os.getName() == null
 				: this.getName().equals(os.getName()))
@@ -77,16 +68,13 @@ public abstract class StandardStructure implements CreaStructure {
 		return hash;
 	}
 
-	/*
-     * =============================================== GETTERS AND SETTERS ==============================================
-	 */
 	@Override
-	public CreaElement getParent() {
+	public XMLElement getParent() {
 		return mParent;
 	}
 
 	@Override
-	public CreaStructure setParent( CreaElement parent ) {
+	public XMLStructure setParent( XMLElement parent ) {
 		mParent = parent;
 		return this;
 	}
@@ -97,7 +85,7 @@ public abstract class StandardStructure implements CreaStructure {
 	}
 
 	@Override
-	public CreaStructure setName( String name ) {
+	public XMLStructure setName( String name ) {
 		mName = name;
 		return this;
 	}
@@ -108,7 +96,7 @@ public abstract class StandardStructure implements CreaStructure {
 	}
 
 	@Override
-	public CreaStructure setValue( String value ) {
+	public XMLStructure setValue( String value ) {
 		mValue = value;
 		return this;
 	}

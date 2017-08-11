@@ -21,60 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public interface CreaDocument {
+public final class NullProperty extends NullStructure implements XMLProperty {
 
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    /**
-     *
-     * @param name
-     * @return
-     */
-    public CreaElement initElement( String name );
+    private final static NullProperty mInstance = new NullProperty();
 
     /**
-     *
-     * @param name
-     * @param value
-     * @return
+     * Default constructor for NullElement.
      */
-    public CreaElement initElement( String name, String value );
+    private NullProperty() {
+        super();
+    }
 
-    /**
-     *
-     * @param name
-     * @param value
-     * @return
-     */
-    public CreaProperty initProperty( String name, String value );
-
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
     /**
      *
      * @return
      */
-    public CreaElement getRootElement();
+    public static NullProperty getInstance() {
+        return mInstance;
+    }
 
-    /**
-     *
-     * @param element
-     * @return
-     */
-    public CreaDocument setRootElement( CreaElement element );
+    @Override
+    public XMLProperty setParent( XMLElement element ) {
+        return NullProperty.getInstance();
+    }
 
-    /*
-     * ================================================ UTILITY FUNCTIONS ===============================================
-     */
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
+    @Override
+    public XMLProperty setName( String name ) {
+        return NullProperty.getInstance();
+    }
+
+    @Override
+    public XMLProperty setValue( String value ) {
+        return NullProperty.getInstance();
+    }
+
+    @Override
+    public String toString() {
+        throw new UnsupportedOperationException("Todo");    // TODO: THIS
+    }
 }

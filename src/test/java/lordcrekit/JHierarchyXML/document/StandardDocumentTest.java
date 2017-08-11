@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -64,10 +64,10 @@ public class StandardDocumentTest {
 		assertEquals(true, o1.equals(o2));
 
 		// Test nested children		
-		CreaElement o1c = o1.getRootElement().addChild(o1.initElement("child"));
+		XMLElement o1c = o1.getRootElement().addChild(o1.initElement("child"));
 		assertEquals(false, o1.equals(o2));
 		assertEquals(false, o2.equals(o1));
-		CreaElement o2c = o2.getRootElement().addChild(o2.initElement("child"));
+		XMLElement o2c = o2.getRootElement().addChild(o2.initElement("child"));
 		assertEquals(true, o1.equals(o2));
 
 		// Test values

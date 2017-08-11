@@ -21,57 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.filter;
+
+import lordcrekit.JHierarchyXML.document.XMLElement;
+import lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public final class StandardProperty extends StandardStructure implements CreaProperty {
+public final class ValueFilter implements XMLDocumentFilter {
+
+    /*
+     * ================================================ MEMBER VARIABLES ================================================
+     */
+    private final String mValue;
 
     /*
      * ================================================== CONSTRUCTORS ==================================================
      */
     /**
-     * Constructs a new StandardProperty.
+     * Constructor for ValueFilter.
+     *
+     * @param value
      */
-    StandardProperty( String name, String value ) {
-        super();
-        setName(name);
-        setValue(value);
+    public ValueFilter( String value ) {
+        mValue = value;
     }
 
     /*
-     * =============================================== GETTERS AND SETTERS ==============================================
+     * ================================================ PRIMARY FUNCTIONS ===============================================
      */
     @Override
-    public CreaProperty setParent( CreaElement element ) {
-        if ( getParent() != null )
-            getParent().removeProperty(this);
-
-        super.setParent(element);
-        return this;
+    public boolean accepts( XMLElement element ) {
+        return (element.getValue() == null ? mValue == null : element.getValue().equals(mValue));
     }
 
     @Override
-    public CreaProperty setName( String name ) {
-        super.setName(name);
-        return this;
-    }
-
-    @Override
-    public CreaProperty setValue( String value ) {
-        if ( value == null )
-            throw new NullPointerException("Properties cannot have null values!");
-        super.setValue(value);
-        return this;
-    }
-
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
-    @Override
-    public String toString() {
-        return getName() + "=\"" + getValue() + "\"";
+    public boolean accepts( XMLProperty property ) {
+        return (property.getValue() == null ? mValue == null : property.getValue().equals(mValue));
     }
 }

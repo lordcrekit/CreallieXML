@@ -21,32 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.filter;
+package lordcrekit.JHierarchyXML.filter;
 
-import Creallie.XML.document.CreaElement;
-import Creallie.XML.document.CreaProperty;
+import lordcrekit.JHierarchyXML.document.XMLElement;
+import lordcrekit.JHierarchyXML.document.XMLProperty;
 import java.util.function.Predicate;
 
 /**
  *
- * @author Kramer Lab
+ * @author william
  */
-public class HasElementFilter implements CreaDocumentFilter {
+public class HasElementFilter implements XMLDocumentFilter {
 
-    /*
-     * ================================================ MEMBER VARIABLES ================================================
-     */
     private final Predicate<Integer> mMatchCount;
-    private final CreaDocumentFilter[] mFilters;
+    private final XMLDocumentFilter[] mFilters;
 
-    /*
-     * ================================================== CONSTRUCTORS ==================================================
-     */
     /**
      *
      * @param filters
      */
-    public HasElementFilter( CreaDocumentFilter... filters ) {
+    public HasElementFilter( XMLDocumentFilter... filters ) {
         mMatchCount = i -> (i > 0);
         mFilters = filters;
     }
@@ -56,21 +50,18 @@ public class HasElementFilter implements CreaDocumentFilter {
      * @param matchCount
      * @param filters
      */
-    public HasElementFilter( Predicate<Integer> matchCount, CreaDocumentFilter... filters ) {
+    public HasElementFilter( Predicate<Integer> matchCount, XMLDocumentFilter... filters ) {
         mMatchCount = matchCount;
         mFilters = filters;
     }
 
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
     @Override
-    public boolean accepts( CreaElement element ) {
+    public boolean accepts( XMLElement element ) {
         return mMatchCount.test(element.getChildren(mFilters).size());
     }
 
     @Override
-    public boolean accepts( CreaProperty property ) {
+    public boolean accepts( XMLProperty property ) {
         return false;
     }
 }

@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
-import Creallie.XML.filter.CreaDocumentFilter;
+import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,16 +31,10 @@ import java.util.List;
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public final class NullElement extends NullStructure implements CreaElement {
+public final class NullElement extends NullStructure implements XMLElement {
 
-    /*
-     * ================================================ STATIC VARIABLES ================================================
-     */
     private final static NullElement mInstance = new NullElement();
 
-    /*
-     * ======================================== CONSTRUCTORS & INSTANCE FUNCTIONS =======================================
-     */
     /**
      * Default constructor for NullElement.
      */
@@ -56,67 +50,61 @@ public final class NullElement extends NullStructure implements CreaElement {
         return mInstance;
     }
 
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
     @Override
-    public CreaElement setParent( CreaElement element ) {
+    public XMLElement setParent( XMLElement element ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaElement getChild( CreaDocumentFilter... filters ) {
+    public XMLElement getChild( XMLDocumentFilter... filters ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public List<CreaElement> getChildren( CreaDocumentFilter... filters ) {
+    public List<XMLElement> getChildren( XMLDocumentFilter... filters ) {
         return new ArrayList<>();
     }
 
     @Override
-    public CreaElement addChild( CreaElement element ) {
+    public XMLElement addChild( XMLElement element ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaElement removeChild( CreaElement element ) {
+    public XMLElement removeChild( XMLElement element ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaProperty getProperty( CreaDocumentFilter... filters ) {
+    public XMLProperty getProperty( XMLDocumentFilter... filters ) {
         return NullProperty.getInstance();
     }
 
     @Override
-    public List<CreaProperty> getProperties( CreaDocumentFilter... filters ) {
+    public List<XMLProperty> getProperties( XMLDocumentFilter... filters ) {
         return new ArrayList<>();
     }
 
     @Override
-    public CreaElement addProperty( CreaProperty property ) {
+    public XMLElement addProperty( XMLProperty property ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaElement removeProperty( CreaProperty property ) {
+    public XMLElement removeProperty( XMLProperty property ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaElement setName( String name ) {
+    public XMLElement setName( String name ) {
         return NullElement.getInstance();
     }
 
     @Override
-    public CreaElement setValue( String value ) {
+    public XMLElement setValue( String value ) {
         return NullElement.getInstance();
     }
 
-    /*
-     * ================================================ VISUAL FUNCTIONS ================================================
-     */
     @Override
     public String toString() {
         throw new UnsupportedOperationException("Todo");    // TODO: THIS

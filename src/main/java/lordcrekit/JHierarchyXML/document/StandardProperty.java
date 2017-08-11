@@ -21,62 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.document;
+package lordcrekit.JHierarchyXML.document;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public interface CreaStructure {
-
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    /**
-     *
-     * @return
-     */
-    public boolean exists();
-
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
-    /**
-     *
-     * @return
-     */
-    public CreaElement getParent();
+public final class StandardProperty extends StandardStructure implements XMLProperty {
 
     /**
-     *
-     * @param element
-     * @return
+     * Constructs a new StandardProperty.
      */
-    public CreaStructure setParent(CreaElement element);
+    StandardProperty( String name, String value ) {
+        super();
+        setName(name);
+        setValue(value);
+    }
 
-    /**
-     *
-     * @return
-     */
-    public String getName();
+    @Override
+    public XMLProperty setParent( XMLElement element ) {
+        if ( getParent() != null )
+            getParent().removeProperty(this);
 
-    /**
-     *
-     * @param name
-     * @return
-     */
-    public CreaStructure setName( String name );
+        super.setParent(element);
+        return this;
+    }
 
-    /**
-     *
-     * @return
-     */
-    public String getValue();
+    @Override
+    public XMLProperty setName( String name ) {
+        super.setName(name);
+        return this;
+    }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
-    public CreaStructure setValue( String value );
+    @Override
+    public XMLProperty setValue( String value ) {
+        if ( value == null )
+            throw new NullPointerException("Properties cannot have null values!");
+        super.setValue(value);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + "=\"" + getValue() + "\"";
+    }
 }

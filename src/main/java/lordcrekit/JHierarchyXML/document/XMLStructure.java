@@ -21,44 +21,56 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package Creallie.XML.filter;
-
-import Creallie.XML.document.CreaElement;
-import Creallie.XML.document.CreaProperty;
+package lordcrekit.JHierarchyXML.document;
 
 /**
  *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
-public final class ValueFilter implements CreaDocumentFilter {
+public interface XMLStructure {
 
-    /*
-     * ================================================ MEMBER VARIABLES ================================================
-     */
-    private final String mValue;
-
-    /*
-     * ================================================== CONSTRUCTORS ==================================================
-     */
     /**
-     * Constructor for ValueFilter.
+     *
+     * @return
+     */
+    boolean exists();
+
+    /**
+     *
+     * @return
+     */
+    XMLElement getParent();
+
+    /**
+     *
+     * @param element
+     * @return
+     */
+    XMLStructure setParent(XMLElement element);
+
+    /**
+     *
+     * @return
+     */
+    String getName();
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    XMLStructure setName( String name );
+
+    /**
+     *
+     * @return
+     */
+    String getValue();
+
+    /**
      *
      * @param value
+     * @return
      */
-    public ValueFilter( String value ) {
-        mValue = value;
-    }
-
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
-    @Override
-    public boolean accepts( CreaElement element ) {
-        return (element.getValue() == null ? mValue == null : element.getValue().equals(mValue));
-    }
-
-    @Override
-    public boolean accepts( CreaProperty property ) {
-        return (property.getValue() == null ? mValue == null : property.getValue().equals(mValue));
-    }
+    XMLStructure setValue( String value );
 }
