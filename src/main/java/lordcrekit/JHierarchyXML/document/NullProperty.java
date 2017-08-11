@@ -24,7 +24,6 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class NullProperty extends NullStructure implements XMLProperty {
@@ -39,7 +38,6 @@ public final class NullProperty extends NullStructure implements XMLProperty {
     }
 
     /**
-     *
      * @return
      */
     public static NullProperty getInstance() {
@@ -47,17 +45,17 @@ public final class NullProperty extends NullStructure implements XMLProperty {
     }
 
     @Override
-    public XMLProperty setParent( XMLElement element ) {
+    public XMLProperty setParent(XMLElement element) {
         return NullProperty.getInstance();
     }
 
     @Override
-    public XMLProperty setName( String name ) {
+    public XMLProperty setName(String name) {
         return NullProperty.getInstance();
     }
 
     @Override
-    public XMLProperty setValue( String value ) {
+    public XMLProperty setValue(String value) {
         return NullProperty.getInstance();
     }
 

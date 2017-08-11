@@ -1,5 +1,7 @@
-<Root type="basic"><Child>
+<Root type="basic">
+    <Child>
 
 
-Hello!</Child>
+        Hello!
+    </Child>
 </Root>

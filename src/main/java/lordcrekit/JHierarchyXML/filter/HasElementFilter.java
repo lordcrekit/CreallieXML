@@ -25,10 +25,10 @@ package lordcrekit.JHierarchyXML.filter;
 
 import lordcrekit.JHierarchyXML.document.XMLElement;
 import lordcrekit.JHierarchyXML.document.XMLProperty;
+
 import java.util.function.Predicate;
 
 /**
- *
  * @author william
  */
 public class HasElementFilter implements XMLDocumentFilter {
@@ -37,31 +37,29 @@ public class HasElementFilter implements XMLDocumentFilter {
     private final XMLDocumentFilter[] mFilters;
 
     /**
-     *
      * @param filters
      */
-    public HasElementFilter( XMLDocumentFilter... filters ) {
+    public HasElementFilter(XMLDocumentFilter... filters) {
         mMatchCount = i -> (i > 0);
         mFilters = filters;
     }
 
     /**
-     *
      * @param matchCount
      * @param filters
      */
-    public HasElementFilter( Predicate<Integer> matchCount, XMLDocumentFilter... filters ) {
+    public HasElementFilter(Predicate<Integer> matchCount, XMLDocumentFilter... filters) {
         mMatchCount = matchCount;
         mFilters = filters;
     }
 
     @Override
-    public boolean accepts( XMLElement element ) {
+    public boolean accepts(XMLElement element) {
         return mMatchCount.test(element.getChildren(mFilters).size());
     }
 
     @Override
-    public boolean accepts( XMLProperty property ) {
+    public boolean accepts(XMLProperty property) {
         return false;
     }
 }

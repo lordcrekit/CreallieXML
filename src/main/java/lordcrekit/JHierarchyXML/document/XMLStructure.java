@@ -24,53 +24,45 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public interface XMLStructure {
 
     /**
-     *
      * @return
      */
     boolean exists();
 
     /**
-     *
      * @return
      */
     XMLElement getParent();
 
     /**
-     *
      * @param element
      * @return
      */
     XMLStructure setParent(XMLElement element);
 
     /**
-     *
      * @return
      */
     String getName();
 
     /**
-     *
      * @param name
      * @return
      */
-    XMLStructure setName( String name );
+    XMLStructure setName(String name);
 
     /**
-     *
      * @return
      */
     String getValue();
 
     /**
-     *
      * @param value
      * @return
      */
-    XMLStructure setValue( String value );
+    XMLStructure setValue(String value);
 }

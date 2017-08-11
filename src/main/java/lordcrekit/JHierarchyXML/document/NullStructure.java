@@ -24,7 +24,6 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public abstract class NullStructure implements XMLStructure {
@@ -43,10 +42,10 @@ public abstract class NullStructure implements XMLStructure {
     }
 
     @Override
-    public XMLStructure setParent( XMLElement element ) {
+    public XMLStructure setParent(XMLElement element) {
         return this;
     }
-    
+
     @Override
     public String getName() {
         return null;

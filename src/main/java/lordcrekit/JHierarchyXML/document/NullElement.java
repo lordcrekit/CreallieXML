@@ -24,11 +24,11 @@
 package lordcrekit.JHierarchyXML.document;
 
 import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class NullElement extends NullStructure implements XMLElement {
@@ -43,7 +43,6 @@ public final class NullElement extends NullStructure implements XMLElement {
     }
 
     /**
-     *
      * @return
      */
     public static NullElement getInstance() {
@@ -51,57 +50,57 @@ public final class NullElement extends NullStructure implements XMLElement {
     }
 
     @Override
-    public XMLElement setParent( XMLElement element ) {
+    public XMLElement setParent(XMLElement element) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLElement getChild( XMLDocumentFilter... filters ) {
+    public XMLElement getChild(XMLDocumentFilter... filters) {
         return NullElement.getInstance();
     }
 
     @Override
-    public List<XMLElement> getChildren( XMLDocumentFilter... filters ) {
+    public List<XMLElement> getChildren(XMLDocumentFilter... filters) {
         return new ArrayList<>();
     }
 
     @Override
-    public XMLElement addChild( XMLElement element ) {
+    public XMLElement addChild(XMLElement element) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLElement removeChild( XMLElement element ) {
+    public XMLElement removeChild(XMLElement element) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLProperty getProperty( XMLDocumentFilter... filters ) {
+    public XMLProperty getProperty(XMLDocumentFilter... filters) {
         return NullProperty.getInstance();
     }
 
     @Override
-    public List<XMLProperty> getProperties( XMLDocumentFilter... filters ) {
+    public List<XMLProperty> getProperties(XMLDocumentFilter... filters) {
         return new ArrayList<>();
     }
 
     @Override
-    public XMLElement addProperty( XMLProperty property ) {
+    public XMLElement addProperty(XMLProperty property) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLElement removeProperty( XMLProperty property ) {
+    public XMLElement removeProperty(XMLProperty property) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLElement setName( String name ) {
+    public XMLElement setName(String name) {
         return NullElement.getInstance();
     }
 
     @Override
-    public XMLElement setValue( String value ) {
+    public XMLElement setValue(String value) {
         return NullElement.getInstance();
     }
 
@@ -111,7 +110,7 @@ public final class NullElement extends NullStructure implements XMLElement {
     }
 
     @Override
-    public StringBuilder toString( StringBuilder strb, int indents ) {
+    public StringBuilder toString(StringBuilder strb, int indents) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

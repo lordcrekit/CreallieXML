@@ -24,6 +24,7 @@
 package lordcrekit.JHierarchyXML.document;
 
 import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +32,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class StandardElement extends StandardStructure implements XMLElement {
@@ -46,90 +46,90 @@ public final class StandardElement extends StandardStructure implements XMLEleme
         super();
     }
 
-	@Override
-	public boolean equals(Object o) {
-		if ( !(o instanceof XMLElement) )
-			return false;
-		if ( !super.equals(o))
-			return false;
-		XMLElement oe = (XMLElement) o;
-		return this.mChildren.equals(oe.getChildren())
-				&& this.mPropertys.equals(oe.getProperties());
-	}
-
-	@Override
-	public int hashCode() {
-		int hash = 7;
-		hash = 41 * hash + Objects.hashCode(this.mChildren);
-		hash = 41 * hash + Objects.hashCode(this.mPropertys);
-		return hash;
-	}
-	
     @Override
-    public XMLElement setParent( XMLElement element ) {
+    public boolean equals(Object o) {
+        if (!(o instanceof XMLElement))
+            return false;
+        if (!super.equals(o))
+            return false;
+        XMLElement oe = (XMLElement) o;
+        return this.mChildren.equals(oe.getChildren())
+                && this.mPropertys.equals(oe.getProperties());
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.mChildren);
+        hash = 41 * hash + Objects.hashCode(this.mPropertys);
+        return hash;
+    }
+
+    @Override
+    public XMLElement setParent(XMLElement element) {
         XMLElement oldParent = getParent();
         super.setParent(element);
 
-        if ( oldParent != null && oldParent != getParent() )
+        if (oldParent != null && oldParent != getParent())
             oldParent.removeChild(this);
 
         return this;
     }
 
     @Override
-    public XMLElement getChild( XMLDocumentFilter... filters ) {
+    public XMLElement getChild(XMLDocumentFilter... filters) {
         return mChildren.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).findFirst().orElse(NullElement.getInstance());
     }
 
     @Override
-    public List<XMLElement> getChildren( XMLDocumentFilter... filters ) {
+    public List<XMLElement> getChildren(XMLDocumentFilter... filters) {
         return mChildren.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).collect(Collectors.toList());
     }
 
     @Override
-    public XMLElement addChild( XMLElement element ) {
-        if ( element.getParent() != this )
+    public XMLElement addChild(XMLElement element) {
+        if (element.getParent() != this)
             mChildren.add(element.setParent(this));
         return this;
     }
 
     @Override
-    public XMLElement removeChild( XMLElement element ) {
-        if ( element.getParent() == this )
+    public XMLElement removeChild(XMLElement element) {
+        if (element.getParent() == this)
             mChildren.remove(element.setParent(null));
         return this;
     }
 
     @Override
-    public XMLProperty getProperty( XMLDocumentFilter... filters ) {
+    public XMLProperty getProperty(XMLDocumentFilter... filters) {
         return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).findFirst().orElse(NullProperty.getInstance());
     }
 
     @Override
-    public List<XMLProperty> getProperties( XMLDocumentFilter... filters ) {
+    public List<XMLProperty> getProperties(XMLDocumentFilter... filters) {
         return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).collect(Collectors.toList());
     }
 
     @Override
-    public XMLElement addProperty( XMLProperty property ) {
+    public XMLElement addProperty(XMLProperty property) {
         mPropertys.add(property.setParent(this));
         return this;
     }
 
     @Override
-    public XMLElement removeProperty( XMLProperty property ) {
+    public XMLElement removeProperty(XMLProperty property) {
         mPropertys.remove(property.setParent(null));
         return this;
     }
 
     @Override
-    public XMLElement setName( String name ) {
+    public XMLElement setName(String name) {
         super.setName(name);
         return this;
     }
 
     @Override
-    public XMLElement setValue( String value ) {
+    public XMLElement setValue(String value) {
         super.setValue(value);
         return this;
     }
@@ -140,26 +140,26 @@ public final class StandardElement extends StandardStructure implements XMLEleme
     }
 
     @Override
-    public StringBuilder toString( StringBuilder strb, int indents ) {
-        if ( indents > 0 ) {
+    public StringBuilder toString(StringBuilder strb, int indents) {
+        if (indents > 0) {
             char[] indent = new char[indents];
-            for ( int i = 0; i < indents; i++ )
+            for (int i = 0; i < indents; i++)
                 indent[i] = '\t';
             strb.append(indent);
         }
         strb.append("<").append(this.getName());
-        for ( XMLProperty i : mPropertys )
+        for (XMLProperty i : mPropertys)
             strb.append(" ").append(i.toString());
         strb.append(">");
-        if ( getValue() != null )
+        if (getValue() != null)
             strb.append(this.getValue()
-					.replaceAll("\n", "\\\\n")
-					.replaceAll("\t", "\\\\t")
-					.replaceAll("\\\\", "\\\\"));
-        for ( XMLElement i : mChildren ){
+                    .replaceAll("\n", "\\\\n")
+                    .replaceAll("\t", "\\\\t")
+                    .replaceAll("\\\\", "\\\\"));
+        for (XMLElement i : mChildren) {
             strb.append('\n');
-			i.toString(strb, indents + 1);
-		}
+            i.toString(strb, indents + 1);
+        }
 
         return strb;
     }

@@ -1,4 +1,6 @@
-<Root type="basic"><Child>Hello!
+<Root type="basic">
+    <Child>Hello!
 
 
-</Child></Root>
+    </Child>
+</Root>

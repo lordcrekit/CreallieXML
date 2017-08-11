@@ -24,7 +24,6 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class StandardProperty extends StandardStructure implements XMLProperty {
@@ -32,15 +31,15 @@ public final class StandardProperty extends StandardStructure implements XMLProp
     /**
      * Constructs a new StandardProperty.
      */
-    StandardProperty( String name, String value ) {
+    StandardProperty(String name, String value) {
         super();
         setName(name);
         setValue(value);
     }
 
     @Override
-    public XMLProperty setParent( XMLElement element ) {
-        if ( getParent() != null )
+    public XMLProperty setParent(XMLElement element) {
+        if (getParent() != null)
             getParent().removeProperty(this);
 
         super.setParent(element);
@@ -48,14 +47,14 @@ public final class StandardProperty extends StandardStructure implements XMLProp
     }
 
     @Override
-    public XMLProperty setName( String name ) {
+    public XMLProperty setName(String name) {
         super.setName(name);
         return this;
     }
 
     @Override
-    public XMLProperty setValue( String value ) {
-        if ( value == null )
+    public XMLProperty setValue(String value) {
+        if (value == null)
             throw new NullPointerException("Properties cannot have null values!");
         super.setValue(value);
         return this;

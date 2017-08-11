@@ -1,6 +1,6 @@
 <Root type="basic">
-	<Child>Hello!</Child>
-	<Child>
-		<Inner type="inner">Inner Child</Inner>
-	</Child>
+    <Child>Hello!</Child>
+    <Child>
+        <Inner type="inner">Inner Child</Inner>
+    </Child>
 </Root>

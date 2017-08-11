@@ -24,94 +24,83 @@
 package lordcrekit.JHierarchyXML.document;
 
 import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
+
 import java.util.List;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public interface XMLElement extends XMLStructure {
 
     /**
-     *
      * @param element
      * @return
      */
     @Override
-    XMLElement setParent( XMLElement element );
-    
+    XMLElement setParent(XMLElement element);
+
     /**
-     *
      * @param filters
      * @return
      */
-    XMLElement getChild( XMLDocumentFilter... filters );
+    XMLElement getChild(XMLDocumentFilter... filters);
 
     /**
-     *
      * @param filters
      * @return
      */
-    List<XMLElement> getChildren( XMLDocumentFilter... filters );
+    List<XMLElement> getChildren(XMLDocumentFilter... filters);
 
     /**
-     *
      * @param element
      * @return
      */
-    XMLElement addChild( XMLElement element );
+    XMLElement addChild(XMLElement element);
 
     /**
-     *
      * @param element
      * @return
      */
-    XMLElement removeChild( XMLElement element );
+    XMLElement removeChild(XMLElement element);
 
-    
+
     /**
-     * 
      * @param filters
-     * @return 
+     * @return
      */
     XMLProperty getProperty(XMLDocumentFilter... filters);
-    
+
     /**
-     * 
      * @param filters
-     * @return 
+     * @return
      */
     List<XMLProperty> getProperties(XMLDocumentFilter... filters);
-    
+
     /**
-     *
      * @param property
      * @return
      */
-    XMLElement addProperty( XMLProperty property );
+    XMLElement addProperty(XMLProperty property);
 
     /**
-     *
      * @param property
      * @return
      */
-    XMLElement removeProperty( XMLProperty property );
+    XMLElement removeProperty(XMLProperty property);
 
     /**
-     *
      * @param name
      * @return
      */
     @Override
-    XMLElement setName( String name );
+    XMLElement setName(String name);
 
     /**
-     *
      * @param value
      * @return
      */
     @Override
-    XMLElement setValue( String value );
+    XMLElement setValue(String value);
 
     StringBuilder toString(StringBuilder strb, int indents);
 }

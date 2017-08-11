@@ -27,7 +27,6 @@ import lordcrekit.JHierarchyXML.document.XMLElement;
 import lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class NameFilter implements XMLDocumentFilter {
@@ -37,19 +36,20 @@ public final class NameFilter implements XMLDocumentFilter {
     /**
      * Constructors a new NameFilter. Accepts any element or property with a matching name.
      *
-     * @param name <code>{@link String }</code>: The name that must be matched.
+     * @param name
+     *         <code>{@link String }</code>: The name that must be matched.
      */
-    public NameFilter( String name ) {
+    public NameFilter(String name) {
         mName = name;
     }
 
     @Override
-    public boolean accepts( XMLElement element ) {
+    public boolean accepts(XMLElement element) {
         return (element.getName() == null ? mName == null : element.getName().equals(mName));
     }
 
     @Override
-    public boolean accepts( XMLProperty property ) {
+    public boolean accepts(XMLProperty property) {
         return (property.getName() == null ? mName == null : property.getName().equals(mName));
     }
 }

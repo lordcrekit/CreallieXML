@@ -26,78 +26,77 @@ package lordcrekit.JHierarchyXML.document;
 import java.util.Objects;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public abstract class StandardStructure implements XMLStructure {
 
-	private XMLElement mParent;
-	private String mName;
-	private String mValue;
+    private XMLElement mParent;
+    private String mName;
+    private String mValue;
 
-	/**
-	 * Default constructor for StandardStructure.
-	 */
-	protected StandardStructure() {
-	}
+    /**
+     * Default constructor for StandardStructure.
+     */
+    protected StandardStructure() {
+    }
 
-	@Override
-	public boolean exists() {
-		return true;
-	}
+    @Override
+    public boolean exists() {
+        return true;
+    }
 
-	@Override
-	public boolean equals( Object o ) {
-		if ( !(o instanceof XMLStructure) )
-			return false;
-		XMLStructure os = (XMLStructure) o;
-		return (this.getName() == null
-				? os.getName() == null
-				: this.getName().equals(os.getName()))
-				&& (this.getValue() == null
-						? os.getValue() == null
-						: this.getValue().equals(os.getValue()));
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof XMLStructure))
+            return false;
+        XMLStructure os = (XMLStructure) o;
+        return (this.getName() == null
+                ? os.getName() == null
+                : this.getName().equals(os.getName()))
+                && (this.getValue() == null
+                ? os.getValue() == null
+                : this.getValue().equals(os.getValue()));
+    }
 
-	@Override
-	public int hashCode() {
-		int hash = 7;
-		hash = 97 * hash + Objects.hashCode(this.mParent);
-		hash = 97 * hash + Objects.hashCode(this.mName);
-		hash = 97 * hash + Objects.hashCode(this.mValue);
-		return hash;
-	}
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.mParent);
+        hash = 97 * hash + Objects.hashCode(this.mName);
+        hash = 97 * hash + Objects.hashCode(this.mValue);
+        return hash;
+    }
 
-	@Override
-	public XMLElement getParent() {
-		return mParent;
-	}
+    @Override
+    public XMLElement getParent() {
+        return mParent;
+    }
 
-	@Override
-	public XMLStructure setParent( XMLElement parent ) {
-		mParent = parent;
-		return this;
-	}
+    @Override
+    public XMLStructure setParent(XMLElement parent) {
+        mParent = parent;
+        return this;
+    }
 
-	@Override
-	public String getName() {
-		return mName;
-	}
+    @Override
+    public String getName() {
+        return mName;
+    }
 
-	@Override
-	public XMLStructure setName( String name ) {
-		mName = name;
-		return this;
-	}
+    @Override
+    public XMLStructure setName(String name) {
+        mName = name;
+        return this;
+    }
 
-	@Override
-	public String getValue() {
-		return mValue;
-	}
+    @Override
+    public String getValue() {
+        return mValue;
+    }
 
-	@Override
-	public XMLStructure setValue( String value ) {
-		mValue = value;
-		return this;
-	}
+    @Override
+    public XMLStructure setValue(String value) {
+        mValue = value;
+        return this;
+    }
 }

@@ -1,1 +1,6 @@
-<Root type="basic"><Child>Hello!</Child><Child><Inner type="inner">Inner Child</Inner></Child></Root>
+<Root type="basic">
+    <Child>Hello!</Child>
+    <Child>
+        <Inner type="inner">Inner Child</Inner>
+    </Child>
+</Root>

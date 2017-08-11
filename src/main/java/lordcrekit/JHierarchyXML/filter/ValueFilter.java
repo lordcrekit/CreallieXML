@@ -27,7 +27,6 @@ import lordcrekit.JHierarchyXML.document.XMLElement;
 import lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class ValueFilter implements XMLDocumentFilter {
@@ -40,12 +39,13 @@ public final class ValueFilter implements XMLDocumentFilter {
     /*
      * ================================================== CONSTRUCTORS ==================================================
      */
+
     /**
      * Constructor for ValueFilter.
      *
      * @param value
      */
-    public ValueFilter( String value ) {
+    public ValueFilter(String value) {
         mValue = value;
     }
 
@@ -53,12 +53,12 @@ public final class ValueFilter implements XMLDocumentFilter {
      * ================================================ PRIMARY FUNCTIONS ===============================================
      */
     @Override
-    public boolean accepts( XMLElement element ) {
+    public boolean accepts(XMLElement element) {
         return (element.getValue() == null ? mValue == null : element.getValue().equals(mValue));
     }
 
     @Override
-    public boolean accepts( XMLProperty property ) {
+    public boolean accepts(XMLProperty property) {
         return (property.getValue() == null ? mValue == null : property.getValue().equals(mValue));
     }
 }

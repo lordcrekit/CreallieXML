@@ -24,64 +24,64 @@
 package lordcrekit.JHierarchyXML.document;
 
 import org.junit.AfterClass;
-import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 /**
- *
  * @author lordc
  */
 public class StandardDocumentTest {
-	
-	public StandardDocumentTest() {
-		System.out.println("StandardDocument");
-	}
 
-	@BeforeClass
-	public static void setUpClass() {
-		System.out.println(StandardDocument.class.getName());
-	}
+    public StandardDocumentTest() {
+        System.out.println("StandardDocument");
+    }
 
-	@AfterClass
-	public static void tearDownClass() {
-		System.out.println("\n");
-	}
+    @BeforeClass
+    public static void setUpClass() {
+        System.out.println(StandardDocument.class.getName());
+    }
 
-	@Test
-	public void testEquals() {
-		System.out.println("test Equals");
-		StandardDocument o1 = new StandardDocument();
-		StandardDocument o2 = new StandardDocument();
-		// Test empty
-		assertEquals(true, o1.equals(o2));
+    @AfterClass
+    public static void tearDownClass() {
+        System.out.println("\n");
+    }
 
-		// Test children
-		o1.setRootElement(o1.initElement("root"));
-		assertEquals(false, o1.equals(o2));
-		assertEquals(false, o2.equals(o1));
-		o2.setRootElement(o2.initElement("root"));
-		assertEquals(true, o1.equals(o2));
+    @Test
+    public void testEquals() {
+        System.out.println("test Equals");
+        StandardDocument o1 = new StandardDocument();
+        StandardDocument o2 = new StandardDocument();
+        // Test empty
+        assertEquals(true, o1.equals(o2));
 
-		// Test nested children		
-		XMLElement o1c = o1.getRootElement().addChild(o1.initElement("child"));
-		assertEquals(false, o1.equals(o2));
-		assertEquals(false, o2.equals(o1));
-		XMLElement o2c = o2.getRootElement().addChild(o2.initElement("child"));
-		assertEquals(true, o1.equals(o2));
+        // Test children
+        o1.setRootElement(o1.initElement("root"));
+        assertEquals(false, o1.equals(o2));
+        assertEquals(false, o2.equals(o1));
+        o2.setRootElement(o2.initElement("root"));
+        assertEquals(true, o1.equals(o2));
 
-		// Test values
-		o1c.setValue("value");
-		assertEquals(false, o1.equals(o2));
-		assertEquals(false, o2.equals(o1));
-		o2c.setValue("value");
-		assertEquals(true, o1.equals(o2));
+        // Test nested children
+        XMLElement o1c = o1.getRootElement().addChild(o1.initElement("child"));
+        assertEquals(false, o1.equals(o2));
+        assertEquals(false, o2.equals(o1));
+        XMLElement o2c = o2.getRootElement().addChild(o2.initElement("child"));
+        assertEquals(true, o1.equals(o2));
 
-		// Test properties
-		o1c.addProperty(o1.initProperty("prop", "prop_value"));
-		assertEquals(false, o1.equals(o2));
-		assertEquals(false, o2.equals(o1));
-		o2c.addProperty(o2.initProperty("prop", "prop_value"));
-		assertEquals(true, o1.equals(o2));
-	}
+        // Test values
+        o1c.setValue("value");
+        assertEquals(false, o1.equals(o2));
+        assertEquals(false, o2.equals(o1));
+        o2c.setValue("value");
+        assertEquals(true, o1.equals(o2));
+
+        // Test properties
+        o1c.addProperty(o1.initProperty("prop", "prop_value"));
+        assertEquals(false, o1.equals(o2));
+        assertEquals(false, o2.equals(o1));
+        o2c.addProperty(o2.initProperty("prop", "prop_value"));
+        assertEquals(true, o1.equals(o2));
+    }
 }

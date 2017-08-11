@@ -24,44 +24,38 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public interface XMLDocument {
 
     /**
-     *
      * @param name
      * @return
      */
-    XMLElement initElement( String name );
+    XMLElement initElement(String name);
 
     /**
-     *
      * @param name
      * @param value
      * @return
      */
-    XMLElement initElement( String name, String value );
+    XMLElement initElement(String name, String value);
 
     /**
-     *
      * @param name
      * @param value
      * @return
      */
-    XMLProperty initProperty( String name, String value );
+    XMLProperty initProperty(String name, String value);
 
     /**
-     *
      * @return
      */
     XMLElement getRootElement();
 
     /**
-     *
      * @param element
      * @return
      */
-    XMLDocument setRootElement( XMLElement element );
+    XMLDocument setRootElement(XMLElement element);
 }

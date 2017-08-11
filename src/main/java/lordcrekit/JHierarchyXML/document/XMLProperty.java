@@ -24,7 +24,6 @@
 package lordcrekit.JHierarchyXML.document;
 
 /**
- *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public interface XMLProperty extends XMLStructure {
@@ -32,27 +31,25 @@ public interface XMLProperty extends XMLStructure {
     /*
      * =============================================== GETTERS AND SETTERS ==============================================
      */
+
     /**
-     *
      * @param element
      * @return
      */
     @Override
-    XMLProperty setParent( XMLElement element );
+    XMLProperty setParent(XMLElement element);
 
     /**
-     *
      * @param name
      * @return
      */
     @Override
-    XMLProperty setName( String name );
+    XMLProperty setName(String name);
 
     /**
-     *
      * @param value
      * @return
      */
     @Override
-    XMLProperty setValue( String value );
+    XMLProperty setValue(String value);
 }
