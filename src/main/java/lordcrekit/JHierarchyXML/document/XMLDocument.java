@@ -29,33 +29,49 @@ package lordcrekit.JHierarchyXML.document;
 public interface XMLDocument {
 
     /**
+     * Initialize a new XMLElement for this XMLDocument.
+     *
      * @param name
-     * @return
+     *         The name of the new XMLElement.
+     * @return The new XMLElement.
      */
     XMLElement initElement(String name);
 
     /**
+     * Initialize a new XMLElement for this XMLDocument.
+     *
      * @param name
+     *         The name of the new XMLElement.
      * @param value
-     * @return
+     *         The text content value of the new XMLElement.
+     * @return The new XMLElement.
      */
     XMLElement initElement(String name, String value);
 
     /**
+     * Initialize a new XMLProperty for this XMLDocument.
+     *
      * @param name
+     *         The name of the new XMLProperty.
      * @param value
-     * @return
+     *         The text content value for the new XMLProperty.
+     * @return The new XMLProperty.
      */
     XMLProperty initProperty(String name, String value);
 
     /**
-     * @return
+     * Get the root XMLElement of this XMLDocument.
+     *
+     * @return The root XMLElement of this XMLDocument.
      */
     XMLElement getRootElement();
 
     /**
+     * Set the root XMLElement of this XMLDocument.
+     *
      * @param element
-     * @return
+     *         The new root XMLElement for this XMLDocument.
+     * @return A pointer back to this XMLDocument.
      */
     XMLDocument setRootElement(XMLElement element);
 }

@@ -30,16 +30,10 @@ public final class NullProperty extends NullStructure implements XMLProperty {
 
     private final static NullProperty mInstance = new NullProperty();
 
-    /**
-     * Default constructor for NullElement.
-     */
     private NullProperty() {
         super();
     }
 
-    /**
-     * @return
-     */
     public static NullProperty getInstance() {
         return mInstance;
     }

@@ -29,6 +29,8 @@ import lordcrekit.JHierarchyXML.document.XMLProperty;
 import java.util.function.Predicate;
 
 /**
+ * The HasPropertyFilter ensures the number of Properties matching a set of filters adheres to a certain formula.
+ *
  * @author william
  */
 public final class HasPropertyFilter implements XMLDocumentFilter {
@@ -40,7 +42,7 @@ public final class HasPropertyFilter implements XMLDocumentFilter {
      * Constructs a new HasPropertyFilter where any Element with at least one matching property will be accepted.
      *
      * @param filters
-     *         <code>{@link XMLDocumentFilter }...</code>: Filters that will be run on all properties.
+     *         Filters that will be run on all properties.
      */
     public HasPropertyFilter(XMLDocumentFilter... filters) {
         mMatchCount = i -> (i > 0);
@@ -52,9 +54,9 @@ public final class HasPropertyFilter implements XMLDocumentFilter {
      * properties that pass all filters is accepted by the numerical check will be accepted.
      *
      * @param matchCount
-     *         <code>{@link Predicate }&lt;{@link Integer }&gt;</code>: A numeral check.
+     *         A numeral check.
      * @param filters
-     *         <code>{@link XMLDocumentFilter }...</code>: Filters that will be run on all properties.
+     *         Filters that will be run on all properties.
      */
     public HasPropertyFilter(Predicate<Integer> matchCount, XMLDocumentFilter... filters) {
         mMatchCount = matchCount;

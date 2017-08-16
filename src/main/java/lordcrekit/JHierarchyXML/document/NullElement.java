@@ -35,16 +35,10 @@ public final class NullElement extends NullStructure implements XMLElement {
 
     private final static NullElement mInstance = new NullElement();
 
-    /**
-     * Default constructor for NullElement.
-     */
     private NullElement() {
         super();
     }
 
-    /**
-     * @return
-     */
     public static NullElement getInstance() {
         return mInstance;
     }

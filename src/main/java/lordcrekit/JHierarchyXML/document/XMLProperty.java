@@ -28,28 +28,12 @@ package lordcrekit.JHierarchyXML.document;
  */
 public interface XMLProperty extends XMLStructure {
 
-    /*
-     * =============================================== GETTERS AND SETTERS ==============================================
-     */
-
-    /**
-     * @param element
-     * @return
-     */
     @Override
     XMLProperty setParent(XMLElement element);
 
-    /**
-     * @param name
-     * @return
-     */
     @Override
     XMLProperty setName(String name);
 
-    /**
-     * @param value
-     * @return
-     */
     @Override
     XMLProperty setValue(String value);
 }

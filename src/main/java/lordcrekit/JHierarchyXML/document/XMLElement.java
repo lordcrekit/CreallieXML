@@ -32,75 +32,103 @@ import java.util.List;
  */
 public interface XMLElement extends XMLStructure {
 
-    /**
-     * @param element
-     * @return
-     */
     @Override
     XMLElement setParent(XMLElement element);
 
+    @Override
+    XMLElement setName(String name);
+
+    @Override
+    XMLElement setValue(String value);
+
+    // <editor-fold defaultstate="collapsed" desc="Children"
+
     /**
+     * Get the first XMLElement child of this XMLElement that matches the given filters.
+     *
      * @param filters
-     * @return
+     *         The filters to match with.
+     * @return The first matching XMLElement child of this XMLElement, or {@link NullElement} if there are no matches.
      */
     XMLElement getChild(XMLDocumentFilter... filters);
 
     /**
+     * Get all XMLElement children of this XMLElement that match the given filters.
+     *
      * @param filters
-     * @return
+     *         The filters to match with.
+     * @return All matching XMLElement children of this XMLElement.
      */
     List<XMLElement> getChildren(XMLDocumentFilter... filters);
 
     /**
+     * Add a new XMLElement child to this XMLElement. Children are written to file AFTER text content.
+     *
      * @param element
-     * @return
+     *         The XMLElement to add to this XMLElement.
+     * @return A pointer back to this XMLElement.
      */
     XMLElement addChild(XMLElement element);
 
     /**
+     * Remove the given XMLElement from this XMLElement's children.
+     *
      * @param element
-     * @return
+     *         The XMLElement child to remove.
+     * @return A pointer back to this XMLElement.
      */
     XMLElement removeChild(XMLElement element);
 
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="Properties">
 
     /**
+     * Get the first XMLProperty in this XMLElement that matches the given filters.
+     *
      * @param filters
-     * @return
+     *         The filters to match with.
+     * @return The first matching XMLProperty, or {@link NullProperty} if there is no match.
      */
     XMLProperty getProperty(XMLDocumentFilter... filters);
 
     /**
+     * Get all XMLProperties that match the given filters.
+     *
      * @param filters
-     * @return
+     *         The filters to match with.
+     * @return All matching XMLProperties.
      */
     List<XMLProperty> getProperties(XMLDocumentFilter... filters);
 
     /**
+     * Add a new XMLProperty to this XMLElement.
+     *
      * @param property
-     * @return
+     *         The XMLProperty to add.
+     * @return A pointer back to this XMLElement.
      */
     XMLElement addProperty(XMLProperty property);
 
     /**
+     * Remove the given XMLProperty from this XMLElement.
+     *
      * @param property
-     * @return
+     *         The XMLProperty to remove.
+     * @return A pointer back to this XMLElement.
      */
     XMLElement removeProperty(XMLProperty property);
 
-    /**
-     * @param name
-     * @return
-     */
-    @Override
-    XMLElement setName(String name);
+    // </editor-fold>
 
     /**
-     * @param value
-     * @return
+     * Append this XMLElement as valid XML to a StringBuilder. This method is applied recursively.
+     *
+     * @param strb
+     *         The StringBuilder being appended to.
+     * @param indents
+     *         The indent level to start at. If negative, no indent will be applied.
+     * @return A pointer back to the StringBuilder.
      */
-    @Override
-    XMLElement setValue(String value);
-
     StringBuilder toString(StringBuilder strb, int indents);
 }

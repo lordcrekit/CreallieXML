@@ -27,29 +27,31 @@ import lordcrekit.JHierarchyXML.document.XMLElement;
 import lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
+ * The NameFilter ensures a XMLStructures name is a certain value.
+ *
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)
  */
 public final class NameFilter implements XMLDocumentFilter {
 
-    private final String mName;
+    private final String name;
 
     /**
      * Constructors a new NameFilter. Accepts any element or property with a matching name.
      *
      * @param name
-     *         <code>{@link String }</code>: The name that must be matched.
+     *         The value that a XMLStructures name must match. Case sensitive.
      */
     public NameFilter(String name) {
-        mName = name;
+        this.name = name;
     }
 
     @Override
     public boolean accepts(XMLElement element) {
-        return (element.getName() == null ? mName == null : element.getName().equals(mName));
+        return (element.getName() == null ? this.name == null : element.getName().equals(this.name));
     }
 
     @Override
     public boolean accepts(XMLProperty property) {
-        return (property.getName() == null ? mName == null : property.getName().equals(mName));
+        return (property.getName() == null ? this.name == null : property.getName().equals(this.name));
     }
 }

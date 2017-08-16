@@ -39,7 +39,10 @@ public final class StandardDocument implements XMLDocument {
     }
 
     /**
+     * Construct a new StandardDocument with a root element of the given name.
+     *
      * @param rootName
+     *         The name for the root element.
      */
     public StandardDocument(String rootName) {
         mRootElement = initElement(rootName);

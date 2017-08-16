@@ -37,41 +37,60 @@ import java.nio.file.Path;
 public final class Writer {
 
     /**
+     * Write the given XMLDocument to an OutputStream.
+     *
      * @param document
+     *         The document to write.
      * @param outstream
-     * @throws FileNotFoundException
+     *         The stream to write to.
      * @throws IOException
+     *         If something goes wrong writing to the stream.
      */
-    public static void write(XMLDocument document, OutputStream outstream) throws FileNotFoundException, IOException {
+    public static void write(XMLDocument document, OutputStream outstream) throws IOException {
         write(document, new BufferedWriter(new OutputStreamWriter(outstream)));
     }
 
     /**
+     * Write the given XMLDocument to a Writer.
+     *
      * @param document
+     *         The document to write.
      * @param writer
-     * @throws FileNotFoundException
+     *         The writer to write to.
      * @throws IOException
+     *         If something goes wrong writing to the writer.
      */
-    public static void write(XMLDocument document, java.io.Writer writer) throws FileNotFoundException, IOException {
+    public static void write(XMLDocument document, java.io.Writer writer) throws IOException {
         write(document, new BufferedWriter(writer));
     }
 
     /**
+     * Write the given XMLDocument to a File.
+     *
      * @param document
+     *         The XMLDocument to write.
      * @param file
-     * @throws FileNotFoundException
+     *         The File to write to.
      * @throws IOException
+     *         If something goes wrong writing to file.
+     * @deprecated Use {@link #write(XMLDocument, Path)}
      */
-    public static void write(XMLDocument document, File file) throws FileNotFoundException, IOException {
+    @Deprecated
+    public static void write(XMLDocument document, File file) throws IOException {
         try (FileOutputStream outstream = new FileOutputStream(file)) {
             write(document, new BufferedWriter(new OutputStreamWriter(outstream)));
         }
     }
 
     /**
+     * Write the given XMLDocument to a Filepath.
+     *
      * @param document
+     *         The XMLDocument to write.
      * @param path
+     *         The path to write it to.
      * @throws IOException
+     *         If something goes wrong writing to the filepath.
      */
     public static void write(XMLDocument document, Path path) throws IOException {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
@@ -79,7 +98,7 @@ public final class Writer {
         }
     }
 
-    private static void write(XMLDocument document, BufferedWriter writer) throws FileNotFoundException, IOException {
+    private static void write(XMLDocument document, BufferedWriter writer) throws IOException {
         writer.write(getVersion());
         if (document.getRootElement().exists())
             recursion(writer, document.getRootElement());
@@ -87,16 +106,16 @@ public final class Writer {
         writer.flush();
     }
 
-    private static void recursion(BufferedWriter writer, XMLElement element) throws FileNotFoundException, IOException {
-        writer.write("<");
+    private final static void recursion(BufferedWriter writer, XMLElement element) throws IOException {
+        writer.write('<');
         writer.write(element.getName());
         for (XMLProperty prop : element.getProperties())
             try {
-                writer.write(" ");
+                writer.write(' ');
                 writer.write(prop.getName());
                 writer.write("=\"");
                 writer.write(escape_chars(prop.getValue()));
-                writer.write("\"");
+                writer.write('\"');
             } catch (Exception ex) {
                 throw new RuntimeException("In property: " + prop.getName(), ex);
             }
@@ -104,7 +123,7 @@ public final class Writer {
             writer.write(" />");
         else
             try {
-                writer.write(">");
+                writer.write('>');
                 if (element.getValue() != null && !element.getValue().isEmpty())
                     writer.write(escape_chars(element.getValue()));
 
@@ -113,7 +132,7 @@ public final class Writer {
 
                 writer.write("</");
                 writer.write(element.getName());
-                writer.write(">");
+                writer.write('>');
             } catch (Exception ex) {
                 throw new RuntimeException("In element: " + element.getName(), ex);
             }
@@ -124,7 +143,11 @@ public final class Writer {
     }
 
     private static String escape_chars(String out) {
-        return out.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("'", "&apos;").replaceAll("<", "&lt;").
-                replaceAll("&gt;", ">");
+        return out
+                .replaceAll("&", "&amp;")
+                .replaceAll("\"", "&quot;")
+                .replaceAll("'", "&apos;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
     }
 }
