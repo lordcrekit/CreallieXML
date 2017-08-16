@@ -29,7 +29,9 @@ import lordcrekit.JHierarchyXML.document.XMLProperty;
 import java.util.function.Predicate;
 
 /**
- * @author william
+ * The HasElementFilter ensures the number of XMLElement children of an XMLElement adheres to a given formula.
+ *
+ * @author William A. Norman
  */
 public class HasElementFilter implements XMLDocumentFilter {
 
@@ -37,7 +39,11 @@ public class HasElementFilter implements XMLDocumentFilter {
     private final XMLDocumentFilter[] mFilters;
 
     /**
+     * Construct a new HasElementFilter out of the given XMLDocumentFilters. It checks that at least one XMLElement
+     * child matches its filters.
+     *
      * @param filters
+     *         The filters to sort with.
      */
     public HasElementFilter(XMLDocumentFilter... filters) {
         mMatchCount = i -> (i > 0);
@@ -45,8 +51,13 @@ public class HasElementFilter implements XMLDocumentFilter {
     }
 
     /**
+     * Construct a new HasElementFilter out of the given XMLDocumentFilters and a Predicate. The predicates test method
+     * is used to check if the number of matching children is valid.
+     *
      * @param matchCount
+     *         The Predicate to test with.
      * @param filters
+     *         The filters to sort with.
      */
     public HasElementFilter(Predicate<Integer> matchCount, XMLDocumentFilter... filters) {
         mMatchCount = matchCount;

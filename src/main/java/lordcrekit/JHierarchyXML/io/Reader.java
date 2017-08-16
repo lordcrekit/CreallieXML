@@ -45,31 +45,48 @@ import java.util.logging.Logger;
 public final class Reader {
 
     /**
+     * Populate a XMLDocument from an InputStream.
+     *
      * @param document
+     *         An empty XMLDocument to fill with content. Required to create Elements/Properties.
      * @param instream
-     * @return
+     *         The stream to read from.
+     * @return A pointer to the given XMLDocument.
      * @throws IOException
+     *         If something goes wrong while reading from the stream.
      */
     public static XMLDocument read(XMLDocument document, InputStream instream) throws IOException {
         return read(document, new InputSource(instream));
     }
 
     /**
+     * Populate a XMLDocument from a Reader.
+     *
      * @param document
+     *         An empty XMLDocument to fill with content. Required to create Elements/Properties.
      * @param reader
-     * @return
+     *         The reader to read from.
+     * @return A pointer to the given XMLDocument.
      * @throws IOException
+     *         If something goes wrong while reading from the Reader.
      */
     public static XMLDocument read(XMLDocument document, java.io.Reader reader) throws IOException {
         return read(document, new InputSource(reader));
     }
 
     /**
+     * Populate a XMLDocument from a parsed File.
+     *
      * @param document
+     *         An empty XMLDocument to fill with content. Required to create Elements/Properties.
      * @param file
-     * @return
+     *         Path to the file to read.
+     * @return A pointer to the given XMLDocument.
      * @throws IOException
+     *         If something goes wrong while reading the File.
+     * @deprecated Use {@link #read(XMLDocument, Path)}.
      */
+    @Deprecated
     public static XMLDocument read(XMLDocument document, File file) throws IOException {
         try (FileInputStream instream = new FileInputStream(file)) {
             return read(document, new InputSource(instream));
@@ -77,10 +94,15 @@ public final class Reader {
     }
 
     /**
+     * Populate a XMLDocument from a parsed File.
+     *
      * @param document
+     *         An empty XMLDocument to fill with content. Required to create Elements/Properties.
      * @param path
-     * @return
+     *         Path to the file to read.
+     * @return A pointer to the given XMLDocument.
      * @throws IOException
+     *         If something goes wrong while reading from the Path.
      */
     public static XMLDocument read(XMLDocument document, Path path) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
@@ -128,17 +150,9 @@ public final class Reader {
                 @Override
                 public void characters(char ch[], int start, int length) throws SAXException {
                     assert currentElement != null;
-                    //assert curVal == null : "While reading " + new String(ch, start, length);
-
                     curVal = currentElement.getValue() == null
                             ? new StringBuilder()
                             : new StringBuilder(currentElement.getValue());
-//					for ( int i = 0; i < length; i++ )
-//						if ( (ch[start + i] == ' ' || ch[start + i] == '\t' || ch[start + i] == '\n')
-//								&& curVal.length() > 0 && curVal.charAt(curVal.length() - 1) != ' ' )
-//							curVal.append(' ');
-//						else
-//							curVal.append(ch[start + i]);
                     curVal.append(new String(ch, start, length).trim());
                     currentElement.setValue(curVal.toString());
                 }

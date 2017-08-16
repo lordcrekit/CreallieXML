@@ -38,8 +38,8 @@ public interface XMLDocumentFilter {
      * Filter method for XMLElements.
      *
      * @param element
-     *         <code>{@link XMLElement }</code>: The element that is being tested.
-     * @return <code>boolean</code>: True if the XMLElement should be accepted, otherwise false.
+     *         The element that is being tested.
+     * @return <code>true </code> if the XMLElement should be accepted, otherwise <code>false</code>.
      */
     boolean accepts(final XMLElement element);
 
@@ -47,8 +47,8 @@ public interface XMLDocumentFilter {
      * Filter method for XMLProperties.
      *
      * @param property
-     *         <code>{@link XMLProperty }</code>: The property that is being tested.
-     * @return <code>boolean</code>: True if the XMLProperty should be accepted, otherwise false.
+     *         The property that is being tested.
+     * @return <code>true</code>if the XMLProperty should be accepted, otherwise <code>false</code>.
      */
     boolean accepts(final XMLProperty property);
 }

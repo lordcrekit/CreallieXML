@@ -31,34 +31,25 @@ import lordcrekit.JHierarchyXML.document.XMLProperty;
  */
 public final class ValueFilter implements XMLDocumentFilter {
 
-    /*
-     * ================================================ MEMBER VARIABLES ================================================
-     */
-    private final String mValue;
-
-    /*
-     * ================================================== CONSTRUCTORS ==================================================
-     */
+    private final String value;
 
     /**
-     * Constructor for ValueFilter.
+     * Constructor for ValueFilter. Case sensitive.
      *
      * @param value
+     *         The value that matching Properties should have.
      */
     public ValueFilter(String value) {
-        mValue = value;
+        this.value = value;
     }
 
-    /*
-     * ================================================ PRIMARY FUNCTIONS ===============================================
-     */
     @Override
     public boolean accepts(XMLElement element) {
-        return (element.getValue() == null ? mValue == null : element.getValue().equals(mValue));
+        return (element.getValue() == null ? value == null : element.getValue().equals(value));
     }
 
     @Override
     public boolean accepts(XMLProperty property) {
-        return (property.getValue() == null ? mValue == null : property.getValue().equals(mValue));
+        return (property.getValue() == null ? value == null : property.getValue().equals(value));
     }
 }

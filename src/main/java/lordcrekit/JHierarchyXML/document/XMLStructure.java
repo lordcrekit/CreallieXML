@@ -29,40 +29,57 @@ package lordcrekit.JHierarchyXML.document;
 public interface XMLStructure {
 
     /**
-     * @return
+     * Gets if this XMLStructure exists. The JHierarchyXML will never give a null XMLStructure (including XMLElements
+     * and XMLProperties), but will instead give empty implementations.
+     *
+     * @return <code>true</code> if this XMLStructure exists (and is not an empty implementation), otherwise
+     * <code>false</code>.
      */
     boolean exists();
 
     /**
-     * @return
+     * Gets the parent Element of this XMLStructure.
+     *
+     * @return The parent XMLElement of this XMLStructure.
      */
     XMLElement getParent();
 
     /**
-     * @param element
-     * @return
+     * @param element Set the parent XMLElement for this XMLStructure.
+     * @return A pointer back to this XMLStructure.
      */
     XMLStructure setParent(XMLElement element);
 
     /**
-     * @return
+     * Get the name of this XMLStructure. Its identifier.
+     *
+     * @return The name of this XMLStructure.
      */
     String getName();
 
     /**
+     * Set the name for this XMLStructure. Its identifier. Must be a legal XML name.
+     *
      * @param name
-     * @return
+     *         The name to give this XMLStructure.
+     * @return A pointer back to this XMLStructure.
      */
     XMLStructure setName(String name);
 
     /**
-     * @return
+     * Get the String value stored by this XMLStructure. Comments and Elements are excluded if it is an XMLElement.
+     * JHierarchyXML only stores hierarchical information, not mixed text and tags.
+     *
+     * @return The String value of this XMLStructure.
      */
     String getValue();
 
     /**
+     * Set the value for this XMLStructure. If the text contains HTML, it will be excaped when written.
+     *
      * @param value
-     * @return
+     *         The new value for this XMLStructure.
+     * @return A pointer back to this XMLStructure.
      */
     XMLStructure setValue(String value);
 }
