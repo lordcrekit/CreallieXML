@@ -12,7 +12,7 @@
 * Filters may be combined, and there are filters for looking at the child elements/properties. 
 * These filters can take their own filters, recursivly.
 
-######Getting a child element with name "Factor" and value "32"
+###### Getting a child element with name "Factor" and value "32"
 ```java
 XMLElement rootElement = doc.getRootElement();
 XMLElement child = rootElement
