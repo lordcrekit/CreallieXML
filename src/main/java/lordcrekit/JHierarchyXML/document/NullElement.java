@@ -26,6 +26,7 @@ package lordcrekit.JHierarchyXML.document;
 import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -86,6 +87,16 @@ public final class NullElement extends NullStructure implements XMLElement {
     @Override
     public XMLElement removeProperty(XMLProperty property) {
         return NullElement.getInstance();
+    }
+
+    @Override
+    public XMLElement addComment(String comment) {
+        return NullElement.getInstance();
+    }
+
+    @Override
+    public List<String> getComments() {
+        return Arrays.asList();
     }
 
     @Override

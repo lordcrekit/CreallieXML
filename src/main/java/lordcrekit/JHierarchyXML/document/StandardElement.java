@@ -38,6 +38,7 @@ public final class StandardElement extends StandardStructure implements XMLEleme
 
     private final List<XMLElement> mChildren = new ArrayList<>();
     private final List<XMLProperty> mPropertys = new ArrayList<>();
+    private final List<String> comments = new ArrayList<>();
 
     /**
      * Default constructor for StandardElement.
@@ -76,6 +77,7 @@ public final class StandardElement extends StandardStructure implements XMLEleme
         return this;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="Children">
     @Override
     public XMLElement getChild(XMLDocumentFilter... filters) {
         return mChildren.stream()
@@ -104,7 +106,9 @@ public final class StandardElement extends StandardStructure implements XMLEleme
             mChildren.remove(element.setParent(null));
         return this;
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="Properties">
     @Override
     public XMLProperty getProperty(XMLDocumentFilter... filters) {
         return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i)))
@@ -129,6 +133,18 @@ public final class StandardElement extends StandardStructure implements XMLEleme
         mPropertys.remove(property.setParent(null));
         return this;
     }
+
+    @Override
+    public XMLElement addComment(String comment) {
+        this.comments.add(comment);
+        return this;
+    }
+
+    @Override
+    public List<String> getComments() {
+        return this.comments;
+    }
+    // </editor-fold>
 
     @Override
     public XMLElement setName(String name) {

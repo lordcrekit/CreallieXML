@@ -133,6 +133,13 @@ public interface XMLElement extends XMLStructure {
     XMLElement addComment(String comment);
 
     /**
+     * Get all comments currently in this XMLElement.
+     *
+     * @return All comments currently in this XMLElement.
+     */
+    List<String> getComments();
+
+    /**
      * Append this XMLElement as valid XML to a StringBuilder. This method is applied recursively.
      *
      * @param strb

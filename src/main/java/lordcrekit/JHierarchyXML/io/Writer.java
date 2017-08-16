@@ -119,11 +119,19 @@ public final class Writer {
             } catch (Exception ex) {
                 throw new RuntimeException("In property: " + prop.getName(), ex);
             }
-        if ((element.getValue() == null || element.getValue().isEmpty()) && element.getChildren().isEmpty())
+        if ((element.getValue() == null || element.getValue().isEmpty())
+                && element.getComments().isEmpty()
+                && element.getChildren().isEmpty())
             writer.write(" />");
         else
             try {
                 writer.write('>');
+                for (String comment : element.getComments()) {
+                    writer.write("<!-- ");
+                    writer.write(escape_chars(comment));
+                    writer.write(" -->");
+                }
+
                 if (element.getValue() != null && !element.getValue().isEmpty())
                     writer.write(escape_chars(element.getValue()));
 
