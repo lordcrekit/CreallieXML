@@ -22,7 +22,7 @@ XMLElement child = rootElement
     );
 ```
 
-######Getting a child element with the name "Factor" and the Property type="basic"
+###### Getting a child element with the name "Factor" and the Property type="basic"
 ```java
 XMLElement rootElement = doc.getRootElement();
 XMLElement child = rootElement
@@ -43,7 +43,7 @@ XMLElement child = rootElement
 * As a result, you will always avoid ```NullPointerException```s.
 * To see if the element/property actually exists, use the ```exists()``` function.
 
-######See if the root has a child named "Factor"
+###### See if the root has a child named "Factor"
 ```java
 XMLElement rootElement = doc.getRootElement();
 boolean exists = rootElement
