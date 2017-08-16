@@ -1,4 +1,4 @@
-# CreallieXML
+# JHierarchyXML
 * Simplified XML reader, writer, and data structure.
 * Designed for working with purely hierarchical data.
 * Exactly preserves data written in it. When reading outside xml, ignores whitespace used for formatting.
@@ -14,8 +14,8 @@
 
 ######Getting a child element with name "Factor" and value "32"
 ```java
-CreaElement rootElement = doc.getRootElement();
-CreaElement child = rootElement
+XMLElement rootElement = doc.getRootElement();
+XMLElement child = rootElement
     .getChild(
       new NameFilter("Factor"),
       new ValueFilter("32")
@@ -24,8 +24,8 @@ CreaElement child = rootElement
 
 ######Getting a child element with the name "Factor" and the Property type="basic"
 ```java
-CreaElement rootElement = doc.getRootElement();
-CreaElement child = rootElement
+XMLElement rootElement = doc.getRootElement();
+XMLElement child = rootElement
     .getChild(
       new NameFilter("Factor"),
       new HasPropertyFilter(
@@ -36,7 +36,7 @@ CreaElement child = rootElement
 ```
 
 ## Null Elements
-* Because CreallieXML is designed for the shortest possible code, asking for a child which does not exist will return a special case element or property.
+* Because JHierarchyXML is designed for the shortest possible code, asking for a child which does not exist will return a special case element or property.
 * This special case has ```null``` for its name and value.
 * Asking for children/properties will return an empty list
 * Since it has no children, asking for a child/property will return the special case again.
@@ -45,7 +45,7 @@ CreaElement child = rootElement
 
 ######See if the root has a child named "Factor"
 ```java
-CreaElement rootElement = doc.getRootElement();
+XMLElement rootElement = doc.getRootElement();
 boolean exists = rootElement
   .getChild(
     new NameFilter("Factor")
