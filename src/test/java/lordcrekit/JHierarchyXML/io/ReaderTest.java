@@ -30,10 +30,13 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 
@@ -100,66 +103,25 @@ public class ReaderTest {
         }
     }
 
-    /**
-     * Test to make sure characters are properly un-escaped.
-     */
     @Test
-    public void testUnescapingPolicy() {
-    }
+    public void testUnescapingPolicy() throws IOException {
+        System.out.println("Unescaping policy");
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_XMLDocument_InputStream() throws Exception {
-        System.out.println("test Read(XMLDocument, InputStream)");
-//        System.out.println("read");
-//        XMLDocument document = null;
-//        InputStream instream = null;
-//        XMLDocument expResult = null;
-//        Reader.read(document, instream);
-//        XMLDocument result = Reader.read(document, instream);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+        final Map<Character, String> escapeCharacters = new HashMap<>();
+        escapeCharacters.put('&', "&amp;");
+        escapeCharacters.put('\"', "&quot;");
+        escapeCharacters.put('\'', "&apos;");
+        escapeCharacters.put('<', "&lt;");
+        escapeCharacters.put('>', "&gt;");
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_XMLDocument_Reader() throws Exception {
-        System.out.println("test Read(XMLDocument, Reader)");
-//        System.out.println("read");
-//        XMLDocument document = null;
-//        Reader reader = null;
-//        XMLDocument expResult = null;
-//        XMLDocument result = Reader.read(document, reader);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-    }
+        for (final Map.Entry<Character, String> e : escapeCharacters.entrySet()) {
+            final Character literal = e.getKey();
+            final String escapeSequence = e.getValue();
+            System.out.println('\t' + escapeSequence + " => " + literal);
 
-    /**
-     * Test of read method, of class Reader.
-     *
-     * @throws java.lang.Exception
-     */
-    @Test
-    public void testRead_XMLDocument_File() throws Exception {
-        System.out.println("test Read(XMLDocument, File)");
-//        System.out.println("read");
-//        XMLDocument document = null;
-//        File file = null;
-//        XMLDocument expResult = null;
-//        XMLDocument result = Reader.read(document, file);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
+            final String xml_element = "<doc><content>" + escapeSequence + "</content></doc>";
+            final XMLDocument doc = Reader.read(new StandardDocument(), new StringReader(xml_element));
+            assertEquals(literal.toString(), doc.getRootElement().getChild().getValue());
+        }
     }
-
 }
