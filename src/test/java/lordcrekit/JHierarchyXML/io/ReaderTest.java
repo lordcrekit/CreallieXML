@@ -50,7 +50,7 @@ public class ReaderTest {
     @BeforeClass
     public static void setUpClass() throws IOException {
         System.out.println(Reader.class.getName());
-        FILE = Files.createTempDirectory("XMLllieXML-Tests");
+        FILE = Files.createTempDirectory("XML-Tests");
     }
 
     @AfterClass
