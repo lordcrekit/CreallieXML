@@ -54,3 +54,8 @@ boolean exists = rootElement
 
 ## Whitespace policy
 * I have to write this still. After I've done the unit tests, this will be updated.
+
+## Changelog
+ - 2.1
+    - New
+        - You can write comments by adding them to XMLElements. They will not be read.

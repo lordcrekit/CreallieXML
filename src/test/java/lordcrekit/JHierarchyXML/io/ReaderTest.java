@@ -124,4 +124,20 @@ public class ReaderTest {
             assertEquals(literal.toString(), doc.getRootElement().getChild().getValue());
         }
     }
+
+    @Test
+    public void testCommentReading() throws IOException {
+        System.out.println("Comment reading");
+
+        final XMLDocument expected;
+        final XMLDocument withComment;
+        try (StringReader rdr = new StringReader("<doc><content/></doc>")) {
+            expected = Reader.read(new StandardDocument(), rdr);
+        }
+        try (StringReader rdr = new StringReader("<doc><!-- Document comment --><content/></doc>")) {
+            withComment = Reader.read(new StandardDocument(), rdr);
+        }
+
+        assertEquals(expected, withComment);
+    }
 }
