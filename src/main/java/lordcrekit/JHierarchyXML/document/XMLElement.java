@@ -122,6 +122,17 @@ public interface XMLElement extends XMLStructure {
     // </editor-fold>
 
     /**
+     * Add a new comment to this XMLElement. There is no way to retrieve comments. Comments are written to file in the
+     * order provided.Comments are not read from files,only written. Comments to not influence the equality of
+     * XMLElements.
+     *
+     * @param comment
+     *         The comment to be added to this XMLElement.
+     * @return A pointer back to this XMLElement.
+     */
+    XMLElement addComment(String comment);
+
+    /**
      * Append this XMLElement as valid XML to a StringBuilder. This method is applied recursively.
      *
      * @param strb
