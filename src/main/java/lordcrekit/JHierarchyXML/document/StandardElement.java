@@ -78,12 +78,17 @@ public final class StandardElement extends StandardStructure implements XMLEleme
 
     @Override
     public XMLElement getChild(XMLDocumentFilter... filters) {
-        return mChildren.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).findFirst().orElse(NullElement.getInstance());
+        return mChildren.stream()
+                .filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i)))
+                .findFirst()
+                .orElse(NullElement.getInstance());
     }
 
     @Override
     public List<XMLElement> getChildren(XMLDocumentFilter... filters) {
-        return mChildren.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).collect(Collectors.toList());
+        return mChildren.stream()
+                .filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i)))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -102,12 +107,15 @@ public final class StandardElement extends StandardStructure implements XMLEleme
 
     @Override
     public XMLProperty getProperty(XMLDocumentFilter... filters) {
-        return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).findFirst().orElse(NullProperty.getInstance());
+        return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i)))
+                .findFirst()
+                .orElse(NullProperty.getInstance());
     }
 
     @Override
     public List<XMLProperty> getProperties(XMLDocumentFilter... filters) {
-        return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i))).collect(Collectors.toList());
+        return mPropertys.stream().filter(i -> Arrays.stream(filters).allMatch(z -> z.accepts(i)))
+                .collect(Collectors.toList());
     }
 
     @Override

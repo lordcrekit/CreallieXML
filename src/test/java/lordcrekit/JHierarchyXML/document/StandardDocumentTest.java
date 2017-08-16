@@ -30,27 +30,17 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author lordc
+ * @author William A. Norman
  */
 public class StandardDocumentTest {
 
-    public StandardDocumentTest() {
-        System.out.println("StandardDocument");
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
+    public StandardDocumentTest(){
         System.out.println(StandardDocument.class.getName());
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-        System.out.println("\n");
     }
 
     @Test
     public void testEquals() {
-        System.out.println("test Equals");
+        System.out.println("test Equals()");
         StandardDocument o1 = new StandardDocument();
         StandardDocument o2 = new StandardDocument();
         // Test empty
