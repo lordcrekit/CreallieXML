@@ -1,4 +1,4 @@
-group 'lordcrekit'
+group 'com.github.lordcrekit'
 version '3.0.0'
 
 apply plugin: 'java'
@@ -11,4 +11,73 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+// Maven deployment
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+archivesBaseName = 'JHierarchyXML'
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'JHierarchyXML'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Super easy to use XML. Drops advanced features that are usually not used.'
+                url 'https://github.com/lordcrekit/JHierarchyXML'
+
+                scm {
+                    connection 'git@github.com:lordcrekit/JHierarchyXML.git'
+                    developerConnection 'git@github.com:lordcrekit/JHierarchyXML.git'
+                    url 'git@github.com:lordcrekit/JHierarchyXML.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License'
+                        url 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'lordcrekit'
+                        name 'William A. Norman'
+                        email 'lordcrekit@gmail.com'
+                    }
+                }
+            }
+        }
+    }
 }
