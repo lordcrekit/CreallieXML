@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package lordcrekit.JHierarchyXML.document;
+package com.github.lordcrekit.JHierarchyXML.document;
 
 /**
  * @author William A. Norman (LordCrekit@gmail.com, normanwi@msu.edu)

@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package lordcrekit.JHierarchyXML.document;
+package com.github.lordcrekit.JHierarchyXML.document;
 
-import lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
+import com.github.lordcrekit.JHierarchyXML.filter.XMLDocumentFilter;
 
 import java.util.List;
 

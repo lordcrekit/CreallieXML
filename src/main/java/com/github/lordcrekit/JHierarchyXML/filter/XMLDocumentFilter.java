@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package lordcrekit.JHierarchyXML.filter;
+package com.github.lordcrekit.JHierarchyXML.filter;
 
-import lordcrekit.JHierarchyXML.document.XMLElement;
-import lordcrekit.JHierarchyXML.document.XMLProperty;
+import com.github.lordcrekit.JHierarchyXML.document.XMLElement;
+import com.github.lordcrekit.JHierarchyXML.document.XMLProperty;
 
 /**
  * Defines a filter for elements and properties in a XMLDocument. When passed to associate search and get functions,

@@ -1,4 +1,4 @@
-package lordcrekit.JHierarchyXML.document;
+package com.github.lordcrekit.JHierarchyXML.document;
 
 import org.junit.Assert;
 import org.junit.Test;

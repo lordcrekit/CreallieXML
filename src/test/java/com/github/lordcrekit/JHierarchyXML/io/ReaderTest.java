@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package lordcrekit.JHierarchyXML.io;
+package com.github.lordcrekit.JHierarchyXML.io;
 
-import lordcrekit.JHierarchyXML.document.StandardDocument;
-import lordcrekit.JHierarchyXML.document.XMLDocument;
+import com.github.lordcrekit.JHierarchyXML.document.StandardDocument;
+import com.github.lordcrekit.JHierarchyXML.document.XMLDocument;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

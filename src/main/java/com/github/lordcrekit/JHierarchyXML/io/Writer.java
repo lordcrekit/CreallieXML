@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package lordcrekit.JHierarchyXML.io;
+package com.github.lordcrekit.JHierarchyXML.io;
 
-import lordcrekit.JHierarchyXML.document.XMLDocument;
-import lordcrekit.JHierarchyXML.document.XMLElement;
-import lordcrekit.JHierarchyXML.document.XMLProperty;
+import com.github.lordcrekit.JHierarchyXML.document.XMLDocument;
+import com.github.lordcrekit.JHierarchyXML.document.XMLElement;
+import com.github.lordcrekit.JHierarchyXML.document.XMLProperty;
 
 import java.io.*;
 import java.nio.file.Files;

@@ -1,7 +1,7 @@
-package lordcrekit.JHierarchyXML.io;
+package com.github.lordcrekit.JHierarchyXML.io;
 
-import lordcrekit.JHierarchyXML.document.StandardDocument;
-import lordcrekit.JHierarchyXML.document.XMLDocument;
+import com.github.lordcrekit.JHierarchyXML.document.StandardDocument;
+import com.github.lordcrekit.JHierarchyXML.document.XMLDocument;
 import org.junit.Assert;
 import org.junit.Test;
 
